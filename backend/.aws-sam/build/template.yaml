@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: serverless-resume-website
+Globals:
+  Function:
+    Runtime: python3.9
+Parameters:
+  Env:
+    Type: String
+    AllowedValues:
+    - dev
+    - test
+    - prod
+    Description: Environment in which the application will be deployed. Allowed values
+      [dev, test, prod]
+Resources:
+  ResumeViewCounterApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Cors:
+        AllowOrigin: '''https://chigozirimeke.me'''
+      EndpointConfiguration: Regional
+      OpenApiVersion: 3.0.1
+      StageName: Prod
+  ResumeVCFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ResumeVCFunction
+      Handler: app.lambda_handler
+      Policies:
+      - DynamoDBCrudPolicy: null
+        TableName:
+          Ref: CountTable
+      Events:
+        UpdateViews:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: ResumeViewCounterApi
+            Path: /counter
+            Method: GET
+    Metadata:
+      SamResourceId: ResumeVCFunction
+  CountTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: views
+      - AttributeType: S
+    BillingMode: PAY_PER_REQUEST
+    KeySchema:
+    - AttributeName: views
+    - KeyType: HASH
+    TableName: count_table

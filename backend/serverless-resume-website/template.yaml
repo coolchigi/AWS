@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Description: serverless-resume-website
+
+Globals:
+  Function:
+    Runtime: python3.9
+
+Parameters:
+  Env:
+    Type: String
+    AllowedValues:
+      - dev
+      - test
+      - prod
+    Description: Environment in which the application will be deployed. Allowed values [dev, test, prod]
+
+Resources:
+  ResumeViewCounterApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Cors:
+        AllowOrigin: "'https://chigozirimeke.me'"
+      EndpointConfiguration: Regional
+      OpenApiVersion: 3.0.1
+      StageName: Prod
+
+  ResumeVCFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: serverless_web/
+      Handler: app.lambda_handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CountTable
+      Events:
+        UpdateViews:
+          Type: Api #Creates a new API
+          Properties:
+            RestApiId: !Ref ResumeViewCounterApi
+            Path: /counter
+            Method: GET
+
+    #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
+  CountTable:
+    #Lessons
+    #https://stackoverflow.com/questions/30866030/number-of-attributes-in-key-schema-must-match-the-number-of-attributes-defined-i
+    # Do not include any non-key attribute definitions in AttributeDefinitions
+    # Declare attributes in AttributeDefinitions only if you are going to use the attribute in KeySchema
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: count_table
+      AttributeDefinitions:
+        - AttributeName: views
+          AttributeType: S #be consistent,
+      BillingMode: PAY_PER_REQUEST #sets the billing mode to On-Demand Mode.
+      KeySchema:
+        - AttributeName: views
+          KeyType: HASH
+#weight, length talk to local ups store
