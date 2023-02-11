@@ -1,13 +1,34 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: AWS CloudFormation workshop - Resources (uksb-1q9p31idr).
-
-# Add Format Version section here.
-
-# Add Description section here.
+Description: AWS CloudFormation workshop - Resources.
 
 # Add Metadata section here.
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: 'Amazon EC2 Configuration'
+        Parameters:
+          - InstanceType
+    ParameterLabels:
+      InstanceType:
+        default: 'Type of EC2 Instance'
 
 # Add Parameters section here.
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+    Description: 'Enter t2.micro or t2.small. Default is t2.micro.'
 
 # Add Resources section here.
+Resources:
+  WebServerInstance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-0aa7d40eeae50c9a9
+
