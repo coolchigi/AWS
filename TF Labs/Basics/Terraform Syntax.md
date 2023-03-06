@@ -84,6 +84,10 @@ resource "aws_instance" "example" {
 
 In this example, a variable called `instance_type` is defined as a string with a default value of `t2.micro`. The variable is then used in a resource block to set the instance_type attribute for an Amazon Web Services (AWS) instance.
 
+## **Hands On**
+- We are going to be deploying a single server with Terraform! 
+- First things first, if you haven't already, you need to install Terraform
+Go to your web brower & type in terraform. You'll see instructions on how to download Terraform. 
 
 
 ## Closing Note
