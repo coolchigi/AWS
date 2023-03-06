@@ -86,7 +86,7 @@ In this example, a variable called `instance_type` is defined as a string with a
 
 ## **Hands On**
 ***We are going to be deploying a single server with Terraform!***
-### Step 1: Install Terraform
+### **Step 1: Install Terraform**
 
 - First things first, if you haven't already, you need to install Terraform
 Manual Installation:
@@ -100,7 +100,7 @@ Alternatively, if you're using a package manager like Homebrew on macOS or Choco
 - For Chocolatey: `choco install terraform`
 Once installed, you can verify the installation by running the `terraform` command in your terminal or command prompt.
 
-### Step 2: Set env variables Terraform would use to communicate and make changes in your AWS account
+### **Step 2: Set env variables Terraform would use to communicate and make changes in your AWS account**
 
 
 ## Closing Note
