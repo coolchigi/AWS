@@ -85,9 +85,22 @@ resource "aws_instance" "example" {
 In this example, a variable called `instance_type` is defined as a string with a default value of `t2.micro`. The variable is then used in a resource block to set the instance_type attribute for an Amazon Web Services (AWS) instance.
 
 ## **Hands On**
-- We are going to be deploying a single server with Terraform! 
+***We are going to be deploying a single server with Terraform!***
+### Step 1: Install Terraform
+
 - First things first, if you haven't already, you need to install Terraform
-Go to your web brower & type in terraform. You'll see instructions on how to download Terraform. 
+Manual Installation:
+- Download the appropriate Terraform package for your operating system from the Terraform website.
+- Extract the downloaded package to a directory of your choice.
+- Add the Terraform binary to your system's PATH environment variable.
+- Verify the installation by running the terraform command in your terminal or command prompt.
+Alternatively, if you're using a package manager like Homebrew on macOS or Chocolatey on Windows, you can simply run the appropriate command to install Terraform:
+
+- For Homebrew: `brew install terraform`
+- For Chocolatey: `choco install terraform`
+Once installed, you can verify the installation by running the `terraform` command in your terminal or command prompt.
+
+### Step 2: Set env variables Terraform would use to communicate and make changes in your AWS account
 
 
 ## Closing Note
