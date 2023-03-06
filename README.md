@@ -1,4 +1,4 @@
-# Terraform with AWS Readme
+# Terraform with AWS 
 ## Introduction
 
 ![alt text](images/Terraform.png)
