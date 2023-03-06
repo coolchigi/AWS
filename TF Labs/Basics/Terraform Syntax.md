@@ -116,7 +116,7 @@ Type `export AWS_ACCESS_KEY_ID=(your access key id)`
 Type `export AWS_SECRET_ACCESS_KEY=(your secret access key)`
 
 
-### **Step 3: Configure your provider**
+### **Step 3: Configure your provider & resource**
 Create an empty folder, choose any name, put a file named `main.tf` in your folder
 - Install HashiCorp config extension for syntax highlighting > Search Terraform in the extensions marketplace and click Install
 - Add the following to your main.tf
@@ -125,8 +125,41 @@ provider "aws" {
   region = "us-east-1"
 }
 ```
-The `"aws"` keyword is indicating that this is an AWS provider block. "region" is a required parameter in the block that specifies the region where resources will be created.
-- 
+The `aws` keyword is indicating that this is an AWS provider block. "region" is a required parameter in the block that specifies the region where resources will be created.
+- Next, we are going to deploy our virtual server also known as an EC2 instance. EC2 instance is a resource so we need to add a resource block
+```go
+resource "aws_instance" "mywebserver" {
+  ami           = "ami-006dcf34c09e50022"
+  instance_type = "t2.micro"
+}
+```
+  - This code is defining an AWS EC2 instance resource named `"mywebserver"`. It specifies the Amazon Machine Image (AMI) to be used for the instance, which is identified by its unique ID `"ami-006dcf34c09e50022"`. It also specifies the instance type to be "t2.micro", which is a small, low-cost instance type suitable for simple applications or development environments.
+
+- Next `terraform init` in your terminal ![Success](/images/Success.png)
+  Terraform init initializes a new or existing Terraform working directory by downloading and installing the necessary plugins and modules for a given configuration.
+
+- Next `terraform plan`
+  Terraform plan examines the current state of your infrastructure, compares it to the desired state declared in your Terraform configuration files, and then shows you a preview of the changes that Terraform will make to reach the desired state.
+
+- Next type in `terraform apply`
+  Terraform apply is a command that is used to apply the changes described in your Terraform configuration files. It creates, modifies, or deletes the resources in your cloud infrastructure according to the changes you have defined in the Terraform configuration.
+  ![Console](/images/aws%20tf.png)
+  The instance name could be added by including the tags resource in your Terraform script > then run `terraform apply` again
+  Here is the updated resource block:
+```go
+  resource "aws_instance" "mywebserver" {
+  ami           = "ami-006dcf34c09e50022"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "terraform-did-that"
+  }
+}
+```
+Here's the terminal output:
+![Terminal Output](/images/terminal.png)
+
+
 
 
 
