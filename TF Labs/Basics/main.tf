@@ -6,8 +6,8 @@ resource "aws_security_group" "defaultsg" {
   name = "terraform-security-group"
 
   ingress {
-    from_port   = 3000
-    to_port     = 3000
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -20,7 +20,7 @@ resource "aws_instance" "mywebserver" {
   user_data                   = <<-EOF
               #!/bin/bash
               echo "Terraform is the future" > index.html
-              nohup busybox httpd -f -p 3000 &
+              nohup busybox httpd -f -p 8080 &
               EOF
   user_data_replace_on_change = true
 
