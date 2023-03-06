@@ -101,6 +101,33 @@ Alternatively, if you're using a package manager like Homebrew on macOS or Choco
 Once installed, you can verify the installation by running the `terraform` command in your terminal or command prompt.
 
 ### **Step 2: Set env variables Terraform would use to communicate and make changes in your AWS account**
+To grant Terraform access, we need to set our access keys & secret keys. AWS access keys and secret keys are used to authenticate and authorize AWS services and resources. The access key is a public identifier used to grant access, while the secret key is a private key used to sign requests. These keys are required to interact with AWS APIs and services using command-line tools, SDKs, and other AWS management interfaces. 
+
+Set Instructions for Windows || Unix/Linux/macOS
+For Windows:
+
+Open Command Prompt
+Type `set AWS_ACCESS_KEY_ID=(your access key id)`
+Type `set AWS_SECRET_ACCESS_KEY=(your secret access key)`
+For Unix/Linux/macOS:
+
+Open Terminal
+Type `export AWS_ACCESS_KEY_ID=(your access key id)`
+Type `export AWS_SECRET_ACCESS_KEY=(your secret access key)`
+
+
+### **Step 3: Configure your provider**
+Create an empty folder, choose any name, put a file named `main.tf` in your folder
+- Install HashiCorp config extension for syntax highlighting > Search Terraform in the extensions marketplace and click Install
+- Add the following to your main.tf
+```go
+provider "aws" {
+  region = "us-east-1"
+}
+```
+The `"aws"` keyword is indicating that this is an AWS provider block. "region" is a required parameter in the block that specifies the region where resources will be created.
+- 
+
 
 
 ## Closing Note
