@@ -159,6 +159,53 @@ resource "aws_instance" "mywebserver" {
 Here's the terminal output:
 ![Terminal Output](/images/terminal.png)
 
+- Our next step is do deploy a single web server on this instance
+  - We are going to run a simple web server that always returns "Terraform is the future" because it literally is
+  - To do this, we are going to add a user_data block to our terraform file
+  EC2 user data is the script or data passed to an instance when launched to automate tasks, install software or configure instance settings. It's accessible in plain text from within the instance and can specify a script to be executed at launch.
+```go
+user_data = <<-EOF
+              #!/bin/bash
+              echo "Terraform is the future" > index.html
+              nohup busybox httpd -f -p 3000 &
+              EOF
+  user_data_replace_on_change = true
+  ```
+  The `user_data` parameter specifies the script or data that is passed to the instance when it is launched. In this case, the script is a bash script that writes "Terraform is the future" to an index.html file and starts a busybox httpd server on port `8080`. The nohup command is used to ensure that the server continues running even if the SSH session is closed.
+
+  The `user_data_replace_on_change` parameter specifies that the user data should be replaced if the instance is replaced or modified. This ensures that any changes to the user data are reflected in the new instance.
+
+  AWS does not allow any incoming or outgoing traffic from an EC2 instance. Both inbound & outbound traffic is blocked by default so you need to define a security group. a security group acts as a virtual firewall for your EC2 instances to control inbound and outbound traffic.
+```go
+ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+```
+This code is defining a security group ingress rule  for a specific port (in this case, port 3000) to allow inbound traffic over TCP protocol. The cidr_blocks attribute specifies the IP range of incoming traffic that will be allowed. In this case, "0.0.0.0/0" means that traffic from any IP address will be allowed.
+```go
+resource "aws_security_group" "defaultsg" {
+  name = "terraform-security-group"
+
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+```
+- Now that we've created a security group, we need to tell the EC2 instance resource to make use of this. 
+Add the following to your main.tf
+```go
+vpc_security_group_ids = [aws_security_group.instance.id]
+```
+This is called a `reference` and it's amongst the many types of expressions in Terraform
+[Terraform Expressions](https://developer.hashicorp.com/terraform/language/expressions/references)
+
+
 
 
 
