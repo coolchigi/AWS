@@ -1,0 +1,5 @@
+tasks:
+  - name: terraform
+    init: |
+      brew install terraform
+      exit
