@@ -9,7 +9,7 @@ In this guide, we'll cover all the essentials of HCL, including data types, reso
 
 Whether you're new to Terraform or a seasoned pro, this guide is a great resource to help you get up and running with Terraform Syntax. Let's get started! 🤘
 
-😀 How Terraform Works
+ ## 😀 **How Terraform Works**
 Terraform works by defining the desired state of your infrastructure resources in configuration files, which are written in HashiCorp Configuration Language (HCL) or JSON format. These configuration files are then used to create and manage the resources on the cloud provider's platform.
 
 Terraform uses a declarative syntax, which means that you define the desired end state of your infrastructure, and Terraform takes care of the details of how to get there. Terraform also supports modularization, allowing you to reuse common patterns and configurations across your infrastructure.
