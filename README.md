@@ -2,9 +2,19 @@
 ## Introduction
 
 ![alt text](images/Terraform.png)
-Terraform is an open-source tool for building, changing, and versioning infrastructure safely and efficiently. This repository contains my journey into understanding the Infrastructure as Code (IaC) tool, Terraform, specifically as it pertains to Amazon Web Services (AWS).
+Terraform is an open-source tool for building, changing, and versioning infrastructure safely and efficiently. It allows you to define and manage infrastructure resources as code, which can be version controlled, shared, and reused across teams. This repository contains my journey into understanding the Infrastructure as Code (IaC) tool, Terraform, specifically as it pertains to Amazon Web Services (AWS). 
 
 In this repo, you will find various Terraform configurations and modules that I have created as I have explored and learned about Terraform and its capabilities. These configurations serve as examples and can be used as reference for your own Terraform projects.
+
+What is Infrastructure as Code?
+Infrastructure as code (IaC) is the practice of managing and provisioning infrastructure resources using code instead of manual processes. With IaC, infrastructure resources can be created, modified, and destroyed automatically, making it easier to manage large and complex infrastructures.
+
+Using IaC has many benefits, including:
+
+- Consistency: Infrastructure resources are created and configured in a consistent manner, which reduces errors and makes troubleshooting easier.
+- Reproducibility: Infrastructure can be easily recreated or modified based on the code, which is especially useful for testing and development environments.
+- Version control: Code can be version-controlled, allowing changes to be tracked, reviewed, and reverted if necessary.
+- Collaboration: Code can be shared and reviewed by multiple team members, promoting collaboration and knowledge sharing.
 
 ## The Terraform Advantage 😎
 The Terraform Advantage 😎
