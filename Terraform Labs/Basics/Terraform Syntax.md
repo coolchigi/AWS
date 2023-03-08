@@ -5,7 +5,14 @@ HCL is the key to defining infrastructure resources and the foundation of your T
 
 In this guide, we'll cover all the essentials of HCL, including data types, resource blocks, variables, and more. We'll also provide examples and tips to help you master the art of writing efficient and effective Terraform code. 💻
 
+
+
 Whether you're new to Terraform or a seasoned pro, this guide is a great resource to help you get up and running with Terraform Syntax. Let's get started! 🤘
+
+😀 How Terraform Works
+Terraform works by defining the desired state of your infrastructure resources in configuration files, which are written in HashiCorp Configuration Language (HCL) or JSON format. These configuration files are then used to create and manage the resources on the cloud provider's platform.
+
+Terraform uses a declarative syntax, which means that you define the desired end state of your infrastructure, and Terraform takes care of the details of how to get there. Terraform also supports modularization, allowing you to reuse common patterns and configurations across your infrastructure.
 
 ## **Language Syntax**
 Terraform code is a declarative language so you need to *describe* the infrastructure you want and Terraform does the rest. The language has two basic concepts: Blocks & Arguments. 
@@ -81,6 +88,9 @@ resource "aws_instance" "example" {
 }
 
 ```
+
+## **Modules**
+A module is a set of Terraform configurations that can be used as a reusable component across your infrastructure. Modules can be shared across different projects and teams.
 
 In this example, a variable called `instance_type` is defined as a string with a default value of `t2.micro`. The variable is then used in a resource block to set the instance_type attribute for an Amazon Web Services (AWS) instance.
 
