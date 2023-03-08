@@ -181,7 +181,7 @@ user_data = <<-EOF
               EOF
   user_data_replace_on_change = true
   ```
-  The `user_data` parameter specifies the script or data that is passed to the instance when it is launched. In this case, the script is a bash script that writes "Terraform is the future" to an index.html file and starts a busybox httpd server on port `8080`. The nohup command is used to ensure that the server continues running even if the SSH session is closed.
+  The `user_data` parameter specifies the script or data that is passed to the instance when it is launched. In this case, the script is a bash script that writes "Terraform is the future" to an index.html file and starts a busybox httpd server on port `3000`. The nohup command is used to ensure that the server continues running even if the SSH session is closed.
 
   The `user_data_replace_on_change` parameter specifies that the user data should be replaced if the instance is replaced or modified. This ensures that any changes to the user data are reflected in the new instance.
 
