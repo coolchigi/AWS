@@ -10,9 +10,9 @@ Here is a standard provider configuration:
 ```go
 
 provider "aws" {
-    region          = "us-east-1" #--North V
-    access_key      = ${AWS_ACCESS_KEY} #-- your access key
-    secret_key      = ${AWS_SECRET_KEY}
+  region     = "us-east-1"    #--North V
+  access_key = AWS_ACCESS_KEY #-- your access key
+  secret_key = AWS_SECRET_KEY
 }
 ```
 We can see that Terraform configurations using AWS resources will now by default be produced or changed in the us-east-1 region (Virginia).
