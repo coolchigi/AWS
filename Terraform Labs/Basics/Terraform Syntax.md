@@ -1,5 +1,5 @@
 ## 🌟 **Getting Started with Terraform Syntax** 🌟
-**Welcome** to the world of Terraform! In this guide, we'll dive into the basics of Terraform's primary user interface: Hashicorp Configuration Language (HCL), or Configuration Language (CL) for short. 🚀
+**Welcome** to the world of Terraform! In this guide, we'll dive into the basics of Terraform's primary user interface & terraform workflow: Hashicorp Configuration Language (HCL), or Configuration Language (CL) for short. 🚀
 
 HCL is the key to defining infrastructure resources and the foundation of your Terraform code. 😎
 
@@ -221,4 +221,5 @@ This is called a `reference` and it's amongst the many types of expressions in T
 
 
 ## Closing Note
+Congratulations! You’ve learned the basics of Terraform with AWS!
 To fully leverage the benefits of defining your infrastructure as code with Terraform, it is essential to have a clear understanding of your infrastructure's intended structure and required functionality. While Terraform does provide a way to define your infrastructure as code, this understanding is necessary to maximize its potential.
