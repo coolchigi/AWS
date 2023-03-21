@@ -135,3 +135,22 @@ variable "delete_on_termination" {
     default = false
 }
 ```
+
+
+## Follow Along
+We are going to create a **working** version of what we had initially, utilizing the concept variables we've just learned
+- We need three files, `providers.tf `, `main.tf` & `variables.tf`
+- In your `providers.tf `, add the following:
+
+```go
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.19.0"
+    }
+  }
+}
+```
+The registry stores provider-specific documentation. Refer to the Terraform registry to check the [latest version](https://registry.terraform.io/providers/hashicorp/aws/latest) of the available provider and configure various types of resources with AWS.
+- It's good practice to include `required_provider` as this tells Terraform the provider it requires
