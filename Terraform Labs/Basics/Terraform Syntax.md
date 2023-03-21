@@ -147,6 +147,7 @@ resource "aws_instance" "mywebserver" {
 
 - Next `terraform init` in your terminal ![Success](/images/Success.png)
   Terraform init initializes a new or existing Terraform working directory by downloading and installing the necessary plugins and modules for a given configuration.
+  Usually, this command is run only at the beginning of a Terraform project – as far as we stick with the same provider
 
 - Next `terraform plan`
   Terraform plan examines the current state of your infrastructure, compares it to the desired state declared in your Terraform configuration files, and then shows you a preview of the changes that Terraform will make to reach the desired state.
