@@ -9,7 +9,7 @@ variable "ami" {
   }
 }
 
-variable "name" {
+variable "instance_name" {
   type    = string
   default = "My EC2 instance"
 }
@@ -19,6 +19,12 @@ variable "type" {
   description = "Instance type for the EC2 instance"
   default     = "t2.micro"
   sensitive   = true
+}
+
+variable "server_port" {
+  description = "The port the server will use for HTTP requests"
+  type        = number
+  default     = 80
 }
 
 
