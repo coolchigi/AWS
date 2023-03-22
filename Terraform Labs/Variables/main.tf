@@ -1,14 +1,16 @@
 resource "aws_instance" "webserver" {
-  ami           = var.ami
-  instance_type = var.type
+  ami                    = var.ami
+  instance_type          = var.type
+  vpc_security_group_ids = [aws_security_group.instance_sg.id]
 
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, World" > index.html
-              nohup busybox httpd -f -p 8080 &
+              nohup busybox httpd -f -p ${var.server_port} &
               EOF
 
   user_data_replace_on_change = true
+
 
   tags = {
     Name = var.instance_name
@@ -26,20 +28,6 @@ resource "aws_security_group" "instance_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-
-  }
 }
 
 output "public_ip" {
