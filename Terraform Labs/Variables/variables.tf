@@ -24,13 +24,13 @@ variable "type" {
 variable "server_port" {
   description = "The port the server will use for HTTP requests"
   type        = number
-  default     = 80
+  default     = 8080
 }
 
 
-
-variable "subnet" {
+variable "security_group_name" {
+  description = "Name of SG"
   type        = string
-  description = "Subnet ID for network interface"
-  default     = "subnet-0988665dba0fa414b"
+  default     = "terraform-instance"
+
 }
