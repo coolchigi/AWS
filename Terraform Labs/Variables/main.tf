@@ -10,20 +10,18 @@ resource "aws_instance" "webserver" {
 
   user_data_replace_on_change = true
 
-  vpc_security_group_ids = [aws_security_group.instance_sg.id]
-
   tags = {
-    Name = var.name
+    Name = var.instance_name
   }
 
 }
 
 resource "aws_security_group" "instance_sg" {
-  name = "${var.name}-sg"
-
+  name        = "MyEC2instance"
+  description = "Enable SSH and HTTP access"
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.server_port
+    to_port     = var.server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -35,7 +33,15 @@ resource "aws_security_group" "instance_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
 
+  }
 }
 
-
+output "public_ip" {
+  value = aws_instance.webserver.public_ip
+}
