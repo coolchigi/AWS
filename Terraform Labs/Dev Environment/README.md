@@ -23,5 +23,17 @@ To get started, you'll need to install Terraform on your local machine. Once you
 
 ```bash
 git clone https://github.com/your/repo.git
-cd terraform
+cd AWS/terraform-getting-started
 ```
+
+Next, you'll need to configure your AWS credentials. You can do this by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables, or by creating a ~/.aws/credentials file.
+
+
+## **Usage**
+
+```csharp
+terraform init
+terraform apply
+```
+
+
