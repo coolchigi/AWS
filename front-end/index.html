@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-       <script>
-           fetch('https://603t05xyu9.execute-api.us-east-1.amazonaws.com/Prod/counter')
-           .then(response => response.json())
-           .then((data) =>{
-               document.getElementById("visitor_counter").innerText = data.count
-           })
-       </script>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="description" content="" />
@@ -21,9 +14,30 @@
       <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
       <!-- Core theme CSS (includes Bootstrap)-->
       <link href="dist/css/styles.css" rel="stylesheet" />
+      <script type="text/javascript">
+
+      window.onload = function(){
+
+         load();
+
+         function load(){
+            var container = document.getElementById("visitor_counter")
+            console.log(container)
+            let visitor = localStorage.getItem("page_view")
+         if(visitor){
+            visitor = Number(visitor) + 1
+            localStorage.setItem("page_view", visitor)
+         }else{
+            visitor = 1
+         localStorage.setItem("page_view", 1)
+         }
+         container.innerHTML = visitor
+         }
+      }
+                </script>
    </head>
    <body id="page-top">
-       <div id="visitor_counter">yo</div>
+       <div id="visitor_counter"></div>
       <!-- Navigation-->
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
          <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -47,15 +61,16 @@
          <!-- About-->
          <section class="resume-section" id="about">
             <div class="resume-section-content">
+               <!-- <img src="dist/assets/img/cloud-aws.jpg" alt="Girl in a jacket" width="500" height="600"> -->
                <h1 class="mb-0">
                   Chigozirim
-                  <span class="text-primary">Eke</span>
+                  <span class="text-primary">Eke ☁️ </span>
                </h1>
                <div class="subheading mb-5">
-                  2136 Galloway Street, Innisfil ON
+                  Contact Me: <a href="https://calendly.com/chigoeke">calendly.com/chigoeke</a>
                   <a href="mailto:name@email.com">chigo.s.eke@gmail.com</a>
                </div>
-               <p class="lead mb-5">I am an aspiring software engineer experienced in leveraging AWS cloud infrastructure to create innovative solutions</p>
+               <p class="lead mb-5">I am an ambitious aspiring Cloud Engineer with a wealth of experience in leveraging AWS cloud infrastructure, I am excited to put my skills to work and create innovative solutions. Furthermore, I am a certified solutions architect, which demonstrates my deep understanding of the AWS platform and my ability to design and deploy highly available, scalable and fault-tolerant systems.</p>
                <div class="social-icons">
                   <a class="social-icon" href="https://www.linkedin.com/in/chigozirim-eke/"><i class="fab fa-linkedin-in"></i></a>
                   <a class="social-icon" href="https://github.com/coolchigi"><i class="fab fa-github"></i></a>
@@ -201,16 +216,17 @@
             <div class="resume-section-content">
                <h2 class="mb-5">Awards & Certifications</h2>
                <ul class="fa-ul mb-0">
-                  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="e479bdf1-d672-4638-a6e8-35de53c3f3bf" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-                  <li class="space">
+                  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="e479bdf1-d672-4638-a6e8-35de53c3f3bf" data-share-badge-host="https://www.credly.com"></div> 
+                  &nbsp;
+                  <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                  <!-- <li class="space">
                      <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                     AWS Certified Cloud Practitioner
 
-                  </li>
+                  </li> -->
                   <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="876a2eef-b396-408d-86ff-811da7f10d5a" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script> 
-                  <li class="space">
+                  <!-- <li class="space">
                      <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>AWS Certified Solutions Architect                
-                  </li>
+                  </li> -->
                </ul>
             </div>
          </section>
@@ -219,5 +235,24 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
       <!-- Core theme JS-->
       <script src="dist/js/scripts.js"></script>
+      <p>Visit count: <span id="visitCount"></span></p>
+    <script>
+      fetch('YOUR_API_GATEWAY_ENDPOINT_HERE', {
+        method: 'GET',
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch visit count');
+      })
+      .then(data => {
+        console.log('Visit count:', data.count);
+        document.getElementById('visitCount').textContent = data.count;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    </script>
    </body>
 </html>
