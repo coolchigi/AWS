@@ -1,9 +1,18 @@
-## **Serverless Resume Website**
 
-*I suck at making these things so here goes!*
+<p align="center">
+  <img src="path/to/image.png" width="300" />
+  <h1 align="center"><b> 👨‍💻 Serverless Resume Website </b></h1>
+💭 I suck at making these things so here goes!
+</p>
 
-ReadMe template was gotten from this repo [ReadMe Template Inspo](https://github.com/digitalden3/serverless-website-backend)
+<br>
 
+<blockquote>
+   <cite>  <a href="(https://github.com/digitalden3/serverless-website-backend)">ReadMe Template Inspo</a>
+  
+</blockquote>
+
+<br>
 
 <details open="open">
   <summary><h2 style="display: inline-block">Project Details</h2></summary>
@@ -12,7 +21,7 @@ ReadMe template was gotten from this repo [ReadMe Template Inspo](https://github
     <li><a href="#project-date">Project Date</a></li>
     </li>
     <li><a href="#project-description">Project Description</a></li>
-    <li><a href="#aws-sam-cli">AWS SAM CLI</a></li>    
+    <li><a href="#sam-cli">SAM CLI</a></li>    
     <li><a href="#dynamodb">DynamoDB</a></li>
     <li><a href="#lambda-function">Lambda Function</a></li>
     <li><a href="#api-gateway">API Gateway</a></li>
@@ -50,7 +59,7 @@ The frontend of the website is served by Amazon S3, which is configured to host 
 
 
 
-## **SAM CLI**
+## SAM CLI
 
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
 
@@ -70,9 +79,6 @@ sam deploy --guided
 
 The first command initializes a new application project. The second command will build the source of your application. The third command will package and deploy your application to AWS, with a series of prompts. Follow the prompts
 
-
-
-You can find your API Gateway Endpoint URL in the output values displayed after deployment.
 
 ### **Use the SAM CLI to build and test locally**
 
