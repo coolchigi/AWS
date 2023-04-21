@@ -28,7 +28,7 @@
     <li><a href="#github-actions">Github Actions</a></li>
     <li><a href="#unit-testing">Unit Testing</a></li>
     <li><a href="#integration-testing">Integration Testing</a></li>
-    <li><a href="#project-files">Project Files</a></li>
+    <li><a href="#challenges-closing">Challenges & Closing</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -134,3 +134,39 @@ aws cloudformation delete-stack --stack-name serverless-resume-website
 See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
 
 Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
+
+
+## DynamoDB
+----------------------------
+Here's my table definition:
+```yaml
+CounterTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: visitorsCountTable
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+      BillingMode: PAY_PER_REQUEST
+```
+What does it do?
+- Defines CloudFormation stack resource called CounterTable which is a DynamoDB table with the table name visitorsCountTable
+- Table has one attribute called ID with data type String (denoted by "S") and it is the partition key for the table (denoted by HASH)
+- The BillingMode is set to PAY_PER_REQUEST, which means that the requester pays for the provisioned and consumed read and write activity.
+
+That's right, nothing too fancy. And that's the power of designing infrastructure as code using SAM. I encountered an error with the key schema and after minutes of research (AKA Googling), I was able to figure it out by simply changing one line. The best part was SAM doesn't deploy until the resources are good to go! Thank you, SAM, for saving my sanity
+
+
+
+### Challenges-Closing
+----------
+Ah, the joys of trial and error. The biggest challenge I faced was trying to figure out how to use SAM, but who needs documentation when you have sheer determination and a sense of adventure, am I right? (Insert eyeroll here). In all seriousness, I learned the hard way that it's always better to take advantage of the great resources provided by AWS, like their comprehensive documentation, instead of reinventing the wheel. Lesson learned!
+
+Starting a project from scratch can be exciting, but it can also be stressful. Want to avoid headaches and save time? Create an architectural diagram. It gives a bird's-eye view of your project, helps you understand the why and how of each service, and ensures everything is interconnected properly. Think of it as a magic wand that solves 60% of your problems. And remember, always embrace the micro-service approach - it's the secret sauce to building great things! Now go forth and architect away 🏗️
+
+### Acknowledgements
+------------------
+* [Cloud Resume Challenge](https://cloudresumechallenge.dev/)
