@@ -159,6 +159,8 @@ What does it do?
 
 That's right, nothing too fancy. And that's the power of designing infrastructure as code using SAM. I encountered an error with the key schema and after minutes of research (AKA Googling), I was able to figure it out by simply changing one line. The best part was SAM doesn't deploy until the resources are good to go! Thank you, SAM, for saving my sanity
 
+### Lambda Function
+----------------------------------
 
 
 ### Challenges-Closing
