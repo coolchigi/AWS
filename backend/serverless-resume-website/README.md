@@ -18,7 +18,6 @@
   <summary><h2 style="display: inline-block">Project Details</h2></summary>
   <ol>
     <li><a href="#tech-stack">Tech Stack</a>
-    <li><a href="#project-date">Project Date</a></li>
     </li>
     <li><a href="#project-description">Project Description</a></li>
     <li><a href="#sam-cli">SAM CLI</a></li>    
