@@ -8,7 +8,7 @@
 <br>
 
 <blockquote>
-   <cite>  <a href="(https://github.com/digitalden3/serverless-website-backend)">ReadMe Template Inspo</a>
+   <cite>  <a href="https://github.com/digitalden3/serverless-website-backend">ReadMe Template Inspo</a>
   
 </blockquote>
 
