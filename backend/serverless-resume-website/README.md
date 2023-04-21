@@ -1,6 +1,5 @@
 
 <p align="center">
-  <img src="path/to/image.png" width="300" />
   <h1 align="center"><b> 👨‍💻 Serverless Resume Website </b></h1>
 💭 I suck at making these things so here goes!
 </p>
