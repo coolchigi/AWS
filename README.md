@@ -311,7 +311,7 @@ SAM Local Invoke
 -------------------------
 Run and test your SAM Application locally before pushing your code to your central repo.
 
-You'll need 
+To fully understand how SAM works, I will advise following this workshop
 
 https://catalog.workshops.aws/complete-aws-sam/en-US/module-2-local/
 
