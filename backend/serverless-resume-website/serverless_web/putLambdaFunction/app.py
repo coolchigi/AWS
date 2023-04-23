@@ -3,11 +3,11 @@ import json
 
 
 dynamodb = boto3.resource('dynamodb')
-table_name = 'visitrosCountTable'
+table_name = 'visitorsCountTable'
 
 table = dynamodb.Table(table_name)
 
-def handler(event, context):
+def lambda_handler(event, context):
 
     table.update_item(
         Key={'ID': 'viewCount'},
