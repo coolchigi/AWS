@@ -174,37 +174,63 @@ From a microservice approach, having two separate Lambda functions can provide s
 In the case of the counter example, having a separate Lambda function to retrieve the counter value from the DynamoDB table and another to update the counter allows for a more modular design. Each function can be developed and deployed independently, and changes made to one function do not necessarily affect the other.
 
 ### Get Function
+Before deploying your application with SAM, make sure to test it locally. 
 
-```py
-def lambda_handler(event, context):
+To test your individual functions use the command:
 
-    response = table.get_item(Key={'ID': 'viewCount'})
-    view_count = response['Item']['count']
-
-    return{
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Credentials': '*',
-            'Content-Type': 'application/json'
-        },
-        'body': json.dumps(view_count)
-    }
+```bash
+sam local invoke {functionName}
 ```
 
+To test the API, use the command:
+```bash
+sam local start-api
+```
+- When you run the start-api, you'll get a route you can perform http calls on using Postman or whatever API test service of your choice.
+- start-api finds any functions within your AWS SAM template that have HttpApi or Api event sources defined. Then, it mounts the function at the defined HTTP paths.
+
+[start-api](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
+
+There are a couple of ways to make SAM detect changes in your Lambda function code. One is to delete the .aws-sam folder and run `sam local start-api` again, which will force SAM to hot-load the updated function code. Another way is to build the Lambda function with the updates and then deploy the API locally, which will also make SAM detect the changes.
+
+[Discussion on this issue](https://stackoverflow.com/questions/66713446/how-to-force-aws-sam-cli-to-detect-changes)
+
+To build just the lambda function:
+
+```bash
+sam local invoke {functionName}
+# Then
+sam local start-api
+```
+```py
+def lambda_handler(event, context):
+        response = table.get_item(Key={'ID': 'viewCount'})
+        if "Item" in response:
+                view_count = response['Item']['viewCount']
+        print(view_count)
+        return {
+            "statusCode": 200,
+                "headers": {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Credentials": "*",
+                        "Content-Type": "application/json",
+                        "Access-Control-Expose-Headers": "*"
+  },
+  "body": view_count
+}
+```
 This Python function serves as the handler for our Lambda function. When triggered, the Lambda function retrieves the item with the 'ID' of 'viewCount' from a DynamoDB table. The 'view_count' variable is then assigned the value of the 'count' attribute of the retrieved item. The function then constructs and returns an HTTP response with a status code of 200 and a JSON-encoded body containing the value of 'view_count'. 
 
 ### Put Function
-
 ```py
-def handler(event, context):
-
-    table.update_item(
+def lambda_handler(event, context):
+    response = table.update_item(
         Key={'ID': 'viewCount'},
-        UpdateExpression='ADD #count :incr',
-        ExpressionAttributeNames={'#count': 'count'},
-        ExpressionAttributeValues={':incr': 1}
+        UpdateExpression='ADD #viewCount :incr',
+        ExpressionAttributeNames={'#viewCount': 'viewCount'},
+        ExpressionAttributeValues={':incr': 1},
+        ReturnValues='UPDATED_NEW'
     )
     return {
         'statusCode': 200,
@@ -215,6 +241,10 @@ def handler(event, context):
             'Content-Type': 'application/json'
         }
     }
+
+The update is performed using the 'update_item' function, which uses an UpdateExpression to add a value to an existing attribute in the item. The attribute is specified by the 'Key' variable and the value to be added is specified by the 'ExpressionAttributeValues' variable.
+
+The function returns an HTTP 200 status code and some headers, including the 'Content-Type' header which specifies that the response is in JSON format. This indicates that the Lambda function is intended to be used as part of a web service that returns JSON data.
 ```
 
 
