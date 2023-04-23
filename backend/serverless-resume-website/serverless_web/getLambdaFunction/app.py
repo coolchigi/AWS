@@ -1,5 +1,6 @@
 import boto3
 import json
+from decimal import Decimal
 
 # Connect to the DynamoDB table
 
@@ -27,7 +28,7 @@ def lambda_handler(event, context):
                     'Content-Type': 'application/json',
                     'Access-Control-Expose-Headers' : '*'
                 },
-                'body': json.dumps(view_count)
+                'body': json.dumps(view_count, default=str)
             }
         else:
             return {
