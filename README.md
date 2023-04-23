@@ -281,7 +281,6 @@ dynamodb.getItem({
 
 ```
 </li>
-
 <li> <i>pick me</i> Using an API Gateway endpoint with a Lambda function:
 JavaScript can also retrieve the counter value from the DynamoDB table using an API Gateway endpoint with a Lambda function. Here's an example code snippet that sends a GET request to the API Gateway endpoint:
 
