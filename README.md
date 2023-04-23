@@ -8,8 +8,6 @@
   
 </blockquote>
 
-<br>
-
 <details open="open">
   <summary><h2 style="display: inline-block">Project Details</h2></summary>
   <ol>
