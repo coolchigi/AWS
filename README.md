@@ -5,7 +5,6 @@
 
 <blockquote>
    <cite>  <a href="https://github.com/digitalden3/serverless-website-backend" target="_blank">ReadMe Template Inspo</a>
-  
 </blockquote>
 
 <details open="open">
