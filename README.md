@@ -3,7 +3,6 @@
 💭 I suck at making these things so here goes!
 </p>
 
-<br>
 <blockquote>
    <cite>  <a href="https://github.com/digitalden3/serverless-website-backend" target="_blank">ReadMe Template Inspo</a>
   
