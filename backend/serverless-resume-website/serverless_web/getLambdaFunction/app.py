@@ -13,7 +13,9 @@ table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
     try:
+        print("I am here")
         response = table.get_item(Key={'ID': 'viewCount'})
+        print(response)
         if 'Item' in response:
             view_count = response['Item']['count']
             return {

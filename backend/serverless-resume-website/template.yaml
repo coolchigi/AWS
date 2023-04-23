@@ -7,9 +7,10 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+    MemorySize: 128
 
 Resources:
-  ResumeViewCountFunction:
+  ResumeGetCountFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: serverless_web/getLambdaFunction
@@ -26,6 +27,23 @@ Resources:
           Properties:
             Path: /counter
             Method: get
+  ResumePutCountFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: serverless_web/putLambdaFunction
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CounterTable
+      Architectures:
+        - x86_64
+      Events:
+        ResumeAPI:
+          Type: Api
+          Properties:
+            Path: /counter
+            Method: put
   CounterTable:
     Type: AWS::DynamoDB::Table
     Properties:
