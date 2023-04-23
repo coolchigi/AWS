@@ -1,6 +1,6 @@
 import boto3
 import json
-
+from boto3.dynamodb.conditions import Key
 
 dynamodb = boto3.resource('dynamodb')
 table_name = 'visitorsCountTable'
@@ -9,11 +9,12 @@ table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
 
-    table.update_item(
+    response = table.update_item(
         Key={'ID': 'viewCount'},
-        UpdateExpression='ADD #count :incr',
-        ExpressionAttributeNames={'#count': 'count'},
-        ExpressionAttributeValues={':incr': 1}
+        UpdateExpression='ADD #viewCount :incr',
+        ExpressionAttributeNames={'#viewCount': 'viewCount'},
+        ExpressionAttributeValues={':incr': 1},
+        ReturnValues='UPDATED_NEW'
     )
     return {
         'statusCode': 200,
