@@ -189,7 +189,7 @@ sam local start-api
 - When you run the start-api, you'll get a route you can perform http calls on using Postman or whatever API test service of your choice.
 - start-api finds any functions within your AWS SAM template that have HttpApi or Api event sources defined. Then, it mounts the function at the defined HTTP paths.
 
-[start-api](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
+[start-api docs](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
 
 There are a couple of ways to make SAM detect changes in your Lambda function code. One is to delete the .aws-sam folder and run `sam local start-api` again, which will force SAM to hot-load the updated function code. Another way is to build the Lambda function with the updates and then deploy the API locally, which will also make SAM detect the changes.
 
