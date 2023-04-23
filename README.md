@@ -1,11 +1,9 @@
-
 <p align="center">
   <h1 align="center"><b> 👨‍💻 Serverless Resume Website </b></h1>
 💭 I suck at making these things so here goes!
 </p>
 
 <br>
-
 <blockquote>
    <cite>  <a href="https://github.com/digitalden3/serverless-website-backend" target="_blank">ReadMe Template Inspo</a>
   
@@ -16,6 +14,7 @@
 <details open="open">
   <summary><h2 style="display: inline-block">Project Details</h2></summary>
   <ol>
+    <li><a href="#readme-goal">ReadMe Goal</a>
     <li><a href="#tech-stack">Tech Stack</a>
     </li>
     <li><a href="#project-description">Project Description</a></li>
@@ -32,6 +31,11 @@
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
+
+
+### ReadMe Goal
+---------------------
+My goal for this readme is to help others design THEIR cloud resume challenge. I will try to create a roadmap for everyone regardless of your skill level. By that I mean, if you are a newbie to the cloud vs an experienced engineer. I will be putting links to resources you can check out to get a better understanding of the architecture works. My advise is, look through the code samples, if an explanation isn't clear or you dont understand in one go, take a step back. You cant learn everything in a day
 
 
 
@@ -115,7 +119,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-serverless-resume-website$ sam logs -n HelloWorldFunction --stack-name serverless-resume-website --tail
+serverless-resume-website$ sam logs -n ResumeViewCountFunction --stack-name serverless-resume-web-app --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -133,12 +137,14 @@ aws cloudformation delete-stack --stack-name serverless-resume-website
 
 See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
 
+[SAM Workshop](https://catalog.workshops.aws/complete-aws-sam/en-US) This is truly a gold mine that is often overlooked. The AWS workshops are next level, and I highly recommend them. I followed the workshop and customized my function to display the time based on the user's entered time zone. It truly helped me to better understand the concept 
+
 Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
 
 
 ## DynamoDB
 ----------------------------
-Here's my table definition:
+Here's my table definition, you can use:
 ```yaml
 CounterTable:
     Type: AWS::DynamoDB::Table
@@ -159,8 +165,126 @@ What does it do?
 
 That's right, nothing too fancy. And that's the power of designing infrastructure as code using SAM. I encountered an error with the key schema and after minutes of research (AKA Googling), I was able to figure it out by simply changing one line. The best part was SAM doesn't deploy until the resources are good to go! Thank you, SAM, for saving my sanity
 
-### Lambda Function
+## Lambda Function
 ----------------------------------
+I created two separate Lambda functions for my project: one that retrieves the counter value from the DynamoDB table and another that updates the counter. You may be wondering why I took this approach. The reason is that Lambda functions are typically used for event-driven architectures, and designing a single function to handle all requests might seem like a straightforward solution. However, there are tradeoffs to consider. If the system experiences a high volume of both get and update requests, having a single Lambda function could lead to performance issues. This is because both types of requests would be competing for the same resources, potentially causing slower response times and bottlenecks in the system. By using two separate Lambda functions, we can mitigate this issue and achieve better performance overall
+
+From a microservice approach, having two separate Lambda functions can provide several benefits. First, it allows for separation of concerns, where each function is responsible for a specific task, making it easier to develop, test, and maintain the code. This can also help to minimize the impact of changes to one function on other functions.
+
+In the case of the counter example, having a separate Lambda function to retrieve the counter value from the DynamoDB table and another to update the counter allows for a more modular design. Each function can be developed and deployed independently, and changes made to one function do not necessarily affect the other.
+
+### Get Function
+
+```py
+def lambda_handler(event, context):
+
+    response = table.get_item(Key={'ID': 'viewCount'})
+    view_count = response['Item']['count']
+
+    return{
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': '*',
+            'Content-Type': 'application/json'
+        },
+        'body': json.dumps(view_count)
+    }
+```
+
+This Python function serves as the handler for our Lambda function. When triggered, the Lambda function retrieves the item with the 'ID' of 'viewCount' from a DynamoDB table. The 'view_count' variable is then assigned the value of the 'count' attribute of the retrieved item. The function then constructs and returns an HTTP response with a status code of 200 and a JSON-encoded body containing the value of 'view_count'. 
+
+### Put Function
+
+```py
+def handler(event, context):
+
+    table.update_item(
+        Key={'ID': 'viewCount'},
+        UpdateExpression='ADD #count :incr',
+        ExpressionAttributeNames={'#count': 'count'},
+        ExpressionAttributeValues={':incr': 1}
+    )
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': '*',
+            'Content-Type': 'application/json'
+        }
+    }
+```
+
+
+##  API Gateway
+I wish I had taken the time to understand this when I first created the project; it would have been tremendously helpful. Instead, I watched a couple of videos at 1.5x speed (deep sigh) and thought I had understood it. Guess what? I was wrong!
+
+API Gateway carries this project because it acts as a *front door* for HTTP requests to access backend services like your Lambda functions. API Gateway enables the user to trigger those functions via HTTP endpoints. When an HTTP request is made to an API Gateway endpoint, it can pass the request to a Lambda function, which can then process the request and return a response.
+
+Read the importance of CORS > [AWS Lambda CORS](https://docs.aws.amazon.com/lambda/latest/dg/API_Cors.html)
+
+
+## Javascript
+Javascript can be used in the front-end of the Cloud Resume Challenge website to retrieve and display the counter stored in the DynamoDB table. Here are two ways and the drawbacks:
+
+<ol>
+<li>
+Directly accessing the DynamoDB table: JavaScript can directly access the DynamoDB table by using the AWS SDK for JavaScript. Here's an example code snippet that retrieves the counter value from the 'viewCount' item in the 'visitorsCounter' table:
+
+```js
+var AWS = require('aws-sdk');
+var dynamodb = new AWS.DynamoDB();
+
+dynamodb.getItem({
+  TableName: 'visitorsCounter',
+  Key: {
+    'ID': {
+      S: 'viewCount'
+    }
+  }
+}, function (err, data) {
+  if (err) console.log(err);
+  else console.log(data.Item.count.N);
+});
+
+```
+</li>
+
+<li> <i>pick me</i> Using an API Gateway endpoint with a Lambda function:
+JavaScript can also retrieve the counter value from the DynamoDB table using an API Gateway endpoint with a Lambda function. Here's an example code snippet that sends a GET request to the API Gateway endpoint:
+
+```js
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://example.com/my-api-gateway-endpoint", true);
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    var data = JSON.parse(xhr.responseText);
+    console.log(data.count);
+  }
+};
+
+xhr.send();
+```
+In this case, the API Gateway endpoint is backed by a Lambda function that retrieves the counter value from the DynamoDB table and returns it as a JSON response to the client.  Provides a layer of abstraction between the client-side JavaScript code and the database
+</li>
+</ol>
+
+  Drawbacks of the first option:
+  - Scalability concerns: If you have a large number of users accessing the DynamoDB table directly from JavaScript, it can put a strain on your database and affect its scalability.
+
+  - Maintainability concerns: As your application grows, it can become difficult to manage the code that directly accesses the database. This can lead to code that is difficult to maintain and update.
+
+SAM Local Invoke
+-------------------------
+Run and test your SAM Application locally before pushing your code to your central repo.
+
+You'll need 
+
+https://catalog.workshops.aws/complete-aws-sam/en-US/module-2-local/
 
 
 ### Challenges-Closing
