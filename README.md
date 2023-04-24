@@ -47,7 +47,7 @@ My goal for this readme is to help others design THEIR cloud resume challenge. I
 
 ### Project Description
 -----------------
-This is the Serverless Resume Website built using the SAM(Serverless Application Model) CLIInfrastructure is defined in `template.yaml` that SAM uses to create, update resources. SAM pipelines are used for setting up a fully automated continuous integration and delivery (CI/CD) pipeline.  You can update the template to add AWS resources through the same deployment process that updates your application code.
+This is the Serverless Resume Website built using the SAM(Serverless Application Model) CLI. Infrastructure is defined in `template.yaml` that SAM uses to create, update resources. SAM pipelines are used for setting up a fully automated continuous integration and delivery (CI/CD) pipeline.  You can update the template to add AWS resources through the same deployment process that updates your application code.
 
 Aim to showcases the use of serverless architecture to create a web application for hosting a personal resume. It utilizes AWS Lambda, Amazon S3, AWS CloudFront, AWS DNS, API Gateway, and DynamoDB to create a scalable and cost-effective solution that is easy to deploy and maintain.
 
