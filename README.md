@@ -177,13 +177,24 @@ To test your individual functions use the command:
 ```bash
 sam local invoke {functionName}
 ```
-
 To test the API, use the command:
 ```bash
 sam local start-api
 ```
-- When you run the start-api, you'll get a route you can perform http calls on using Postman or whatever API test service of your choice.
-- start-api finds any functions within your AWS SAM template that have HttpApi or Api event sources defined. Then, it mounts the function at the defined HTTP paths.
+- When you run the `sam local start-api` command, it identifies any functions defined in your AWS SAM template that have HttpApi or Api event sources and assigns them to specific HTTP paths. This creates a route that you can use to perform HTTP calls using Postman or any other API testing service of your choice.
+- `sam local start-api` gives you a HTTP Path, you can perform your GET, POST, PUT or DELETE calls and produces the output
+```sql
+    $ sam local start-api
+Invoking index.handler (nodejs10.x)
+Skip pulling image and use local one: amazon/aws-sam-cli-emulation-image-nodejs10.x:rapid-1.31.0.
+Mounting /Users/myuser/project/hello_world as /var/task:ro,delegated inside runtime container
+START RequestId: cbcfd1f7-8eb0-4317-9e03-245f22d422f9 Version: $LATEST
+END RequestId: cbcfd1f7-8eb0-4317-9e03-245f22d422f9
+REPORT RequestId: cbcfd1f7-8eb0-4317-9e03-245f22d422f9 Duration: 0.62 ms Billed Duration: 100 ms Memory Size: 128 MB Max Memory Used: 17 MB
+
+{"statusCode":200,"body":"{\"message\":\"hello world\"}"} //if successful
+```
+- After making changes to your lambda function, you dont have to run the sam command. Instead, test that your API Gateway invokes the function. You do this by firstly, run  entering the path and perform If you try to test your api using the endpoint of your API Gateway, you'd get an error unless
 
 [start-api docs](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
 
