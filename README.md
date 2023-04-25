@@ -185,18 +185,16 @@ sam local start-api
 - `sam local start-api` gives you a HTTP Path, you can perform your GET, POST, PUT or DELETE calls and produces the output
 ```sql
     $ sam local start-api
-Invoking index.handler (nodejs10.x)
-Skip pulling image and use local one: amazon/aws-sam-cli-emulation-image-nodejs10.x:rapid-1.31.0.
-Mounting /Users/myuser/project/hello_world as /var/task:ro,delegated inside runtime container
-START RequestId: cbcfd1f7-8eb0-4317-9e03-245f22d422f9 Version: $LATEST
-END RequestId: cbcfd1f7-8eb0-4317-9e03-245f22d422f9
-REPORT RequestId: cbcfd1f7-8eb0-4317-9e03-245f22d422f9 Duration: 0.62 ms Billed Duration: 100 ms Memory Size: 128 MB Max Memory Used: 17 MB
-
+$ sam local start-api
+Mounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]
+Mounting HelloWorldFunction at http://127.0.0.1:3000/ [PUT]
 {"statusCode":200,"body":"{\"message\":\"hello world\"}"} //if successful
 ```
+  This output shows that the HelloWorldFunction has been mounted at two HTTP paths: http://127.0.0.1:3000/hello and http://127.0.0.1:3000/ for GET & PUT requests.
+
 - After making changes to your lambda function, you dont have to run the sam command. Instead, test that your API Gateway invokes the function. You do this by firstly, run  entering the path and perform If you try to test your api using the endpoint of your API Gateway, you'd get an error unless
 
-[start-api docs](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
+[Check out the docs on start-api](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
 
 There are a couple of ways to make SAM detect changes in your Lambda function code. One is to delete the .aws-sam folder and run `sam local start-api` again, which will force SAM to hot-load the updated function code. Another way is to build the Lambda function with the updates and then deploy the API locally, which will also make SAM detect the changes.
 
