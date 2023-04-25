@@ -184,7 +184,6 @@ sam local start-api
 - When you run the `sam local start-api` command, it identifies any functions defined in your AWS SAM template that have HttpApi or Api event sources and assigns them to specific HTTP paths. This creates a route that you can use to perform HTTP calls using Postman or any other API testing service of your choice.
 - `sam local start-api` gives you a HTTP Path, you can perform your GET, POST, PUT or DELETE calls and produces the output
 ```sql
-    $ sam local start-api
 $ sam local start-api
 Mounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]
 Mounting HelloWorldFunction at http://127.0.0.1:3000/ [PUT]
