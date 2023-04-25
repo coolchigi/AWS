@@ -14,27 +14,8 @@
       <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
       <!-- Core theme CSS (includes Bootstrap)-->
       <link href="dist/css/styles.css" rel="stylesheet" />
-      <script type="text/javascript">
-
-      window.onload = function(){
-
-         load();
-
-         function load(){
-            var container = document.getElementById("visitor_counter")
-            console.log(container)
-            let visitor = localStorage.getItem("page_view")
-         if(visitor){
-            visitor = Number(visitor) + 1
-            localStorage.setItem("page_view", visitor)
-         }else{
-            visitor = 1
-         localStorage.setItem("page_view", 1)
-         }
-         container.innerHTML = visitor
-         }
-      }
-                </script>
+      <link href="https://fonts.googleapis.com/css2?family=Ysabeau&display=swap" rel="stylesheet">
+      
    </head>
    <body id="page-top">
        <div id="visitor_counter"></div>
@@ -42,7 +23,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
          <a class="navbar-brand js-scroll-trigger" href="#page-top">
          <span class="d-block d-lg-none">Chigozirim Eke</span>
-         <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="dist/assets/img/profile.jpg" alt="..." /></span>
+         <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="dist/assets/img/professional_photo.png"  alt="..." /></span>
          </a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -67,12 +48,13 @@
                   <span class="text-primary">Eke ☁️ </span>
                </h1>
                <div class="subheading mb-5">
-                  Contact Me: <a href="https://calendly.com/chigoeke">calendly.com/chigoeke</a>
-                  <a href="mailto:name@email.com">chigo.s.eke@gmail.com</a>
+                  Contact Me: <a target="b
+                  " href="https://calendly.com/chigoeke">calendly.com/chigoeke</a>
+                  <a   href="mailto:name@email.com">chigo.s.eke@gmail.com</a>
                </div>
-               <p class="lead mb-5">I am an ambitious aspiring Cloud Engineer with a wealth of experience in leveraging AWS cloud infrastructure, I am excited to put my skills to work and create innovative solutions. Furthermore, I am a certified solutions architect, which demonstrates my deep understanding of the AWS platform and my ability to design and deploy highly available, scalable and fault-tolerant systems.</p>
+               <p class="lead mb-5">A software engineer and aspiring Cloud Engineer based in Ottawa! with a wealth of experience in leveraging AWS cloud infrastructure, I am excited to put my skills to work and create innovative solutions. Interests are designing scalable systems, full-stack development and backend development.</p>
                <div class="social-icons">
-                  <a class="social-icon" href="https://www.linkedin.com/in/chigozirim-eke/"><i class="fab fa-linkedin-in"></i></a>
+                  <a class="social-icon" target="_blank" href="https://www.linkedin.com/in/chigozirim-eke/"><i class="fab fa-linkedin-in"></i></a>
                   <a class="social-icon" href="https://github.com/coolchigi"><i class="fab fa-github"></i></a>
                   <a class="social-icon" href="#!"><i class="fab fa-twitter"></i></a>
                   <a class="social-icon" href="#!"><i class="fab fa-facebook-f"></i></a>
@@ -86,18 +68,21 @@
                <h2 class="mb-5">Projects</h2>
                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
-                     <h3 class="mb-0">Serverless Website</h3>
-                     <div class="subheading mb-3">Serverless resume website using AWS. Built to participate in Forrest Brazeal's Cloud Resume Challenge.</div>
-                     <li>Built a resume website using the startbootstrap-resume framework</li>
-                     <li>Website front-end is deployed through CloudFront with an S3 origin</li>
-                     <li>Created an OAI that gives Cloudfront distribution the permissions to access the S3 bucket</li>
+                     <h3 class="mb-0">Serverless Resume Website</h3>
+                     <div class="subheading mb-3">Cloud Project</div>
+                     <li>Designed and built a serverless portfolio website using cutting-edge AWS technologies, such as AWS SAM, AWS Lambda, Amazon API Gateway, Amazon DynamoDB, Amazon CloudFront, Amazon S3, AWS Route53, and DNS.</li>
+                     <li>Utilized AWS Lambda, Amazon API Gateway, and Amazon DynamoDB to create a robust backend infrastructure for the website, implementing a micro-service approach for application design.</li>
+                     <li>Leveraged AWS SAM to create an IaC template that generates CloudFormation stacks, representing the resources required to deploy the website.</li>
+                     <li>Integrated a DynamoDB table to store website counts, with an API Gateway calling two Lambda functions to retrieve and update the count respectively.</li>
+                     <li>Configured an Amazon S3 bucket with static website hosting enabled for the website frontend, providing a secure communication channel through HTTPS protocol.
+                     Implemented an Amazon CloudFront distribution, which the S3 bucket points to, enhancing website performance and optimizing content delivery.</li>
                   </div>
                   <div class="flex-shrink-0"><span class="text-primary">June 2022 - Present</span></div>
                </div>
                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
-                     <h3 class="mb-0">Serverless Reminder Application</h3>
-                     <div class="subheading mb-3">Pet-Cuddle-O-Tron</div>
+                     <h3 class="mb-0">Pet-Cuddle-O-Tron - A Serverless Reminder Application</h3>
+                     <div class="subheading mb-3">Cloud Project</div>
                      <li>Serverless reminder application built using AWS Lambda, API Gateway and S3</li>
                      <li>Created an IAM that enables the interaction between the state machine and other AWS services </li>
                      <li>API Gateway served as the API endpoint that communicates with the front end application  </li>
@@ -107,7 +92,7 @@
                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
                      <h3 class="mb-0">Community Fridge Web Application</h3>
-                     <div class="subheading mb-3">A community fridge</div>
+                     <div class="subheading mb-3">A full-stack project</div>
                      <li>	Built an interactive, responsive community fridge application that allows users to shop at select community fridges around their city </li>
                      <li>	Engineered a RESTful API that fetched information, served resources based on request allowing user to perform CRUD operations, speeding up the interchange of data </li>
                      <li>	Stored all data related to the fridges on a MongoDB cloud cluster, increasing the scalability of the application</li>
@@ -140,11 +125,11 @@
                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
                      <h3 class="mb-0">Carleton University</h3>
-                     <div class="subheading mb-3">Bachelor of Computer Science</div>
+                     <div class="subheading mb-3">Bachelor of Computer Science Honours</div>
                      <div>Computer Science - Concentration in Management & Business Systems</div>
                      <!-- <p>GPA: 3.23</p> -->
                   </div>
-                  <div class="flex-shrink-0"><span class="text-primary">September 2020 - June 2025</span></div>
+                  <div class="flex-shrink-0"><span class="text-primary">September 2020 - June 2024</span></div>
                </div>
                <div class="d-flex flex-column flex-md-row justify-content-between">
                   <div class="flex-grow-1">
@@ -216,17 +201,16 @@
             <div class="resume-section-content">
                <h2 class="mb-5">Awards & Certifications</h2>
                <ul class="fa-ul mb-0">
-                  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="e479bdf1-d672-4638-a6e8-35de53c3f3bf" data-share-badge-host="https://www.credly.com"></div> 
+
+                  <li>
+                      <div 
+                  
+                  
+                  data-iframe-width="150" data-iframe-height="270" data-share-badge-id="e479bdf1-d672-4638-a6e8-35de53c3f3bf" data-share-badge-host="https://www.credly.com"></div> 
                   &nbsp;
                   <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-                  <!-- <li class="space">
-                     <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-
-                  </li> -->
+                  </li>
                   <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="876a2eef-b396-408d-86ff-811da7f10d5a" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script> 
-                  <!-- <li class="space">
-                     <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>AWS Certified Solutions Architect                
-                  </li> -->
                </ul>
             </div>
          </section>
