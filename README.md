@@ -31,7 +31,7 @@
 
 ### ReadMe Goal
 ---------------------
-My goal for this readme is to help others design THEIR cloud resume challenge. I will try to create a roadmap for everyone regardless of your skill level. By that I mean, if you are a newbie to the cloud vs an experienced engineer. I will be putting links to resources you can check out to get a better understanding of the architecture works. My advise is, look through the code samples, if an explanation isn't clear or you dont understand in one go, take a step back. You cant learn everything in a day
+I actually completed this project last year and was to create a journal/blog to share my experience this year. I was looking through the code and I noticed, I didnt have a single documentation that explains what I accomplished(hello developer 101 eyeroll). I had just passed the AWS SAA and decided to give this a shot. I completed it but I couldnt understand a single line of code. So instead of redoing everything, I decided to rework the application into better reproducible code. 
 
 
 
@@ -243,7 +243,6 @@ The update is performed using the 'update_item' function, which uses an UpdateEx
 The function returns an HTTP 200 status code and some headers, including the 'Content-Type' header which specifies that the response is in JSON format. This indicates that the Lambda function is intended to be used as part of a web service that returns JSON data.
 ```
 
-
 ##  API Gateway
 I wish I had taken the time to understand this when I first created the project; it would have been tremendously helpful. Instead, I watched a couple of videos at 1.5x speed (deep sigh) and thought I had understood it. Guess what? I was wrong!
 
@@ -310,6 +309,16 @@ Run and test your SAM Application locally before pushing your code to your centr
 To fully understand how SAM works, I will advise following this workshop
 
 https://catalog.workshops.aws/complete-aws-sam/en-US/module-2-local/
+
+### Github Actions
+------------------------
+
+### CI/CD for FrontEnd
+As I was revamping my index.html, I realized I had to either update my S3 bucket using the cli or to do so via the AWS console. This would have defeated my goal of not doing things manually and completing this project without using the console. 
+
+To create the CI/CD, you need to create a .github/workflows folder. 
+- Inside that folder, you would create a yaml file, give it a name you prefer. I am calling mine `frontend-cicd.yaml `
+
 
 
 ### Challenges-Closing
