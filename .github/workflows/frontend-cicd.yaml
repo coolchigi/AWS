@@ -1,4 +1,4 @@
-name: Upload Website folder to S3 bucket
+name: Upload frontend folder to S3 bucket
 
 on:
   push:
