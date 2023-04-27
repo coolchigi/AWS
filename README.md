@@ -325,7 +325,38 @@ https://catalog.workshops.aws/complete-aws-sam/en-US/module-2-local/
 As I was revamping my index.html, I realized I had to either update my S3 bucket using the cli or to do so via the AWS console. This would have defeated my goal of not doing things manually and completing this project without using the console. 
 
 To create the CI/CD, you need to create a .github/workflows folder. 
-- Inside that folder, you would create a yaml file, give it a name you prefer. I am calling mine `frontend-cicd.yaml `
+- Inside that folder, you would create a yaml file, give it a name you prefer. I am calling mine `frontend-cicd.yaml`
+Paste this code
+```yaml
+name: Upload frontend folder to S3 bucket
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION_FRONT }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
+          SOURCE_DIR: "front-end"
+```
+- To use this GitHub Action, you will need to create four different secrets: `DISTRIBUTION_FRONT`, `AWS_S3_BUCKET`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY`. To create a secret, go to your repository, navigate to "Settings" > "Secret & Variables" > "Actions" > "Create new secret". Enter in the name and the value. You can get the values by either logging into the AWS console or using the AWS CLI to perform a query.
+
+Here is an example of some useful AWS CLI queries:
+
+`aws cloudfront list-distributions` to list CloudFront distributions
+`aws s3 ls` to list buckets in S3
 
 
 
