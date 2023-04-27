@@ -70,12 +70,10 @@
                   <div class="flex-grow-1">
                      <h3 class="mb-0">Serverless Resume Website</h3>
                      <div class="subheading mb-3">Cloud Project</div>
-                     <li>Designed and built a serverless portfolio website using cutting-edge AWS technologies, such as AWS SAM, AWS Lambda, Amazon API Gateway, Amazon DynamoDB, Amazon CloudFront, Amazon S3, AWS Route53, and DNS.</li>
+                     <li>Designed a serverless portfolio website using cutting-edge AWS technologies, such as AWS SAM, AWS Lambda, Amazon API Gateway, Amazon DynamoDB, Amazon CloudFront, Amazon S3, AWS Route53, and DNS.</li>
                      <li>Utilized AWS Lambda, Amazon API Gateway, and Amazon DynamoDB to create a robust backend infrastructure for the website, implementing a micro-service approach for application design.</li>
-                     <li>Leveraged AWS SAM to create an IaC template that generates CloudFormation stacks, representing the resources required to deploy the website.</li>
-                     <li>Integrated a DynamoDB table to store website counts, with an API Gateway calling two Lambda functions to retrieve and update the count respectively.</li>
-                     <li>Configured an Amazon S3 bucket with static website hosting enabled for the website frontend, providing a secure communication channel through HTTPS protocol.
-                     Implemented an Amazon CloudFront distribution, which the S3 bucket points to, enhancing website performance and optimizing content delivery.</li>
+                     <li>Leveraged AWS SAM to create an infrastructure as code template that generates CloudFormation stacks, representing the resources required to deploy the website.</li>
+                     <li>Defined a Github action workflow that updates S3 bucket when code is pushed to repo. Monitored status of application with Cloud Watch Logs</li>
                   </div>
                   <div class="flex-shrink-0"><span class="text-primary">June 2022 - Present</span></div>
                </div>
