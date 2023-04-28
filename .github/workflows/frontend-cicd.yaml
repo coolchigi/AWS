@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: jakejarvis/s3-sync-action@master
         with:
-          args: --follow-symlinks --delete
+          args: --exclude '.git*/*' --delete --follow-symlinks
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_FRONT }}
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
