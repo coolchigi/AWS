@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
 
       # Upload to S3
       - name: Upload to S3 bucket
