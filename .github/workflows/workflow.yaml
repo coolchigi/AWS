@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - front-end/**
 
 jobs:
   deploy-and-invalidate:
