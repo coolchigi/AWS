@@ -12422,6 +12422,12 @@ section.resume-section .resume-section-content {
 .lead,
 .subheading {
   font-family: 'Ysabeau', sans-serif;
+
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+  font-size: 18px
 }
 
 li {
