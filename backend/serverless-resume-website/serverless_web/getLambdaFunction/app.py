@@ -13,18 +13,16 @@ def lambda_handler(event, context):
         response = table.get_item(Key={'ID': 'viewCount'})
         if "Item" in response:
                 view_count = response['Item']['viewCount']
-        print(view_count)
         return {
-            "statusCode": 200,
-                "headers": {
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Headers": "*",
-                        "Access-Control-Allow-Credentials": "*",
-                        "Content-Type": "application/json",
-                        "Access-Control-Expose-Headers": "*"
-  },
-  "body": view_count
-  
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': '*',
+            'Access-Control-Allow-Methods' : 'GET',
+            'Content-Type': 'application/json'
+        },
+        "body": view_count
 }
 
 
