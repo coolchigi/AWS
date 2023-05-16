@@ -33,6 +33,16 @@
 ---------------------
 I actually completed this project last year and was to create a journal/blog to share my experience this year. I was looking through the code and I noticed, I didnt have a single documentation that explains what I accomplished(hello developer 101 eyeroll). I had just passed the AWS SAA and decided to give this a shot. I completed it but I couldnt understand a single line of code. So instead of redoing everything, I decided to rework the application into better reproducible code. 
 
+### Modifications
+---------------- 
+- Working Lambda function. Last year, I took the micro-service approach and created two lambda functions. I've decided to use just one.
+- Utilizing the Javascript Fetch API to make requests to my API gateway endpoint.
+- CI/CD with Github Actions for both frontend and backend
+- Split 
+- Documentation: This has been a game changer. I failed to document this project after completing it last year. With a more focused mind and approach, I decided to redo with the above changes. 
+- Local testing with `sam local start-api` & `sam local invoke {functionName}`
+- YAML Template that is reusable and expandable
+
 
 
 ### Tech Stack
@@ -163,11 +173,15 @@ That's right, nothing too fancy. And that's the power of designing infrastructur
 
 ## Lambda Function
 ----------------------------------
-I created two separate Lambda functions for my project: one that retrieves the counter value from the DynamoDB table and another that updates the counter. You may be wondering why I took this approach. The reason is that Lambda functions are typically used for event-driven architectures, and designing a single function to handle all requests might seem like a straightforward solution. However, there are tradeoffs to consider. If the system experiences a high volume of both get and update requests, having a single Lambda function could lead to performance issues. This is because both types of requests would be competing for the same resources, potentially causing slower response times and bottlenecks in the system. By using two separate Lambda functions, we can mitigate this issue and achieve better performance overall
+For my project, I decided to follow a monolithic approach by designing a single Lambda function to handle both the retrieval and updating of the counter value. While microservices are often preferred for their modular and independent nature, I chose a monolithic design considering the specific requirements and constraints of my project.
 
-From a microservice approach, having two separate Lambda functions can provide several benefits. First, it allows for separation of concerns, where each function is responsible for a specific task, making it easier to develop, test, and maintain the code. This can also help to minimize the impact of changes to one function on other functions.
+One of the factors influencing this decision was the challenge I encountered when attempting to use separate Lambda functions. I realized that using distinct API Gateway endpoints for each function introduced complexity, and there was a risk of triggering the wrong function due to misconfiguration. To avoid potential complications and streamline the development process, I opted for a single Lambda function.
 
-In the case of the counter example, having a separate Lambda function to retrieve the counter value from the DynamoDB table and another to update the counter allows for a more modular design. Each function can be developed and deployed independently, and changes made to one function do not necessarily affect the other.
+By implementing a monolithic design, I could ensure that both the retrieval and updating of the counter value were handled within a single codebase. This approach simplified the overall architecture and reduced the risk of inconsistencies or dependencies between separate functions. Additionally, it allowed for easier code maintenance and deployment as changes made to one part of the codebase would not impact the functionality of the other.
+
+While a microservice architecture provides benefits in certain scenarios, such as scalability and independent development, the monolithic approach suited my project's specific needs by offering simplicity, reduced configuration overhead, and easier maintenance
+
+
 
 ### Get Function
 Before deploying your application with SAM, make sure to test it locally. 
