@@ -1,20 +1,20 @@
-function init(){
-  updateData()
-  fetchData()
+updateViewCount()
+
+function updateCounter() {
+    fetch("http://127.0.0.1:3000/counter")
+      .then(res => res.json())
+	    .then(res => {
+		  document.getElementById("visitorNumber").innerHTML = res;
+	});
+      
 }
 
-function updateData(){
-  fetch("https://1i6ummbb99.execute-api.us-east-1.amazonaws.com/Prod/counter")
+function updateViewCount() {
+  const apiUrl = 'http://127.0.0.1:3000/counter';
+  fetch("http://127.0.0.1:3000/counter")
+      .then(res => res.json())
+	    .then(res => {
+		  document.getElementById("visitorNumber").innerHTML = res;
+	});
+      
 }
-function fetchData(){
-   fetch("https://1i6ummbb99.execute-api.us-east-1.amazonaws.com/Prod/counter", )
-    .then((response) => response.json())
-    .then((data) => 
-      document.getElementById('visitorNumber').innerHTML = data
-    );
-}
-
-
-
-init()
-
