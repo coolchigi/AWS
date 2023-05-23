@@ -197,15 +197,24 @@ sam local start-api
 ```
 - When you run the `sam local start-api` command, it identifies any functions defined in your AWS SAM template that have HttpApi or Api event sources and assigns them to specific HTTP paths. This creates a route that you can use to perform HTTP calls using Postman or any other API testing service of your choice.
 - `sam local start-api` gives you a HTTP Path, you can perform your GET, POST, PUT or DELETE calls and produces the output
-```sql
+```bash
 $ sam local start-api
+
 Mounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]
 Mounting HelloWorldFunction at http://127.0.0.1:3000/ [PUT]
 {"statusCode":200,"body":"{\"message\":\"hello world\"}"} //if successful
 ```
   This output shows that the HelloWorldFunction has been mounted at two HTTP paths: http://127.0.0.1:3000/hello and http://127.0.0.1:3000/ for GET & PUT requests.
 
-- After making changes to your lambda function, you dont have to run the sam command. Instead, test that your API Gateway invokes the function. You do this by firstly, run  entering the path and perform If you try to test your api using the endpoint of your API Gateway, you'd get an error unless
+- Use a tool like curl of Postman to send requests to the local API Gateway endpoint (http://localhost:3000) and test your API endpoints. For example
+  ```js
+    curl http://localhost:3000/hello
+  ```
+  - Example terminal output:
+  ```json
+  {"message": "Hello, world!"}
+  ```
+  - As you make requests to the local API Gateway, SAM Local will execute the corresponding Lambda function locally and provide the output in the terminal.
 
 [Check out the docs on start-api](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html)
 
@@ -240,32 +249,12 @@ def lambda_handler(event, context):
 ```
 This Python function serves as the handler for our Lambda function. When triggered, the Lambda function retrieves the item with the 'ID' of 'viewCount' from a DynamoDB table. The 'view_count' variable is then assigned the value of the 'count' attribute of the retrieved item. The function then constructs and returns an HTTP response with a status code of 200 and a JSON-encoded body containing the value of 'view_count'. 
 
-### Put Function
-```py
-def lambda_handler(event, context):
-    response = table.update_item(
-        Key={'ID': 'viewCount'},
-        UpdateExpression='ADD #viewCount :incr',
-        ExpressionAttributeNames={'#viewCount': 'viewCount'},
-        ExpressionAttributeValues={':incr': 1},
-        ReturnValues='UPDATED_NEW'
-    )
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Credentials': '*',
-            'Content-Type': 'application/json'
-        }
-    }
-
-The update is performed using the 'update_item' function, which uses an UpdateExpression to add a value to an existing attribute in the item. The attribute is specified by the 'Key' variable and the value to be added is specified by the 'ExpressionAttributeValues' variable.
+The update is performed using the `update_item` function, which uses an UpdateExpression to add a value to an existing attribute in the item. The attribute is specified by the `Key` variable and the value to be added is specified by the `ExpressionAttributeValues` variable.
 
 The function returns an HTTP 200 status code and some headers, including the 'Content-Type' header which specifies that the response is in JSON format. This indicates that the Lambda function is intended to be used as part of a web service that returns JSON data.
-```
 
-##  API Gateway
+
+## API Gateway
 I wish I had taken the time to understand this when I first created the project; it would have been tremendously helpful. Instead, I watched a couple of videos at 1.5x speed (deep sigh) and thought I had understood it. Guess what? I was wrong!
 
 API Gateway carries this project because it acts as a *front door* for HTTP requests to access backend services like your Lambda functions. API Gateway enables the user to trigger those functions via HTTP endpoints. When an HTTP request is made to an API Gateway endpoint, it can pass the request to a Lambda function, which can then process the request and return a response.
@@ -324,7 +313,7 @@ In this case, the API Gateway endpoint is backed by a Lambda function that retri
 
   - Maintainability concerns: As your application grows, it can become difficult to manage the code that directly accesses the database. This can lead to code that is difficult to maintain and update.
 
-SAM Local Invoke
+## SAM Local Invoke
 -------------------------
 Run and test your SAM Application locally before pushing your code to your central repo.
 
