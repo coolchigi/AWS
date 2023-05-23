@@ -361,7 +361,12 @@ Here is an example of some useful AWS CLI queries:
 `aws cloudfront list-distributions` to list CloudFront distributions
 `aws s3 ls` to list buckets in S3
 
+### CI/CD for BackEnd
+I am going to create another workflow such that an update is pushed to the backend code, the tests defined in Python gets run. If the tests pass, the SAM application should get packaged and deployed to AWS
 
+We need to test our Lambda function and API Gateway endpoint respectively. To do this, we'd create a new stage called `dev`
+
+Resource: https://www.mrnice.dev/posts/testing-aws-lambda-and-api-gateway/
 
 ### Challenges-Closing
 ----------

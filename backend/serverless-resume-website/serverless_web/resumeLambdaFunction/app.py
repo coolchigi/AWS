@@ -30,3 +30,9 @@ def lambda_handler(event, context):
         },
         "body": view_count
     }
+
+# Function to test api gateway. Import all the necessary libraries
+        
+
+        
+
