@@ -31,7 +31,7 @@
 
 ### ReadMe Goal
 ---------------------
-I actually completed this project last year and was to create a journal/blog to share my experience this year. I was looking through the code and I noticed, I didnt have a single documentation that explains what I accomplished(hello developer 101 eyeroll). I had just passed the AWS SAA and decided to give this a shot. I completed it but I couldnt understand a single line of code. So instead of redoing everything, I decided to rework the application into better reproducible code. 
+I actually completed this project last year and wanted to create a journal/blog to share my experience this year. I was looking through the code and I noticed, I didnt have a single documentation that explains what I accomplished(hello developer 101 eyeroll). I had just passed the AWS SAA and decided to give this a shot. I completed it but I couldnt understand a single line of code. So instead of redoing everything, I decided to rework the application into better reproducible code. 
 
 ### Modifications
 ---------------- 
