@@ -37,8 +37,7 @@ I actually completed this project last year and wanted to create a journal/blog 
 ---------------- 
 - Working Lambda function. Last year, I took the micro-service approach and created two lambda functions. I've decided to use just one.
 - Utilizing the Javascript Fetch API to make requests to my API gateway endpoint.
-- CI/CD with Github Actions for both frontend and backend
-- Split 
+- Create two CI/CD pipelines with Github Actions for both frontend and backend
 - Documentation: This has been a game changer. I failed to document this project after completing it last year. With a more focused mind and approach, I decided to redo with the above changes. 
 - Local testing with `sam local start-api` & `sam local invoke {functionName}`
 - YAML Template that is reusable and expandable
