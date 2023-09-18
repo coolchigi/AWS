@@ -4,6 +4,8 @@
 * Start Bootstrap - Resume v7.0.5 (https://startbootstrap.com/theme/resume)
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
+navbar navbar-expand-lg navbar-dark bg-primary fixed-top
+sideNav -> image in picture
 */
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
@@ -17,7 +19,7 @@
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
-  --bs-orange: #bd5d38;
+  --bs-orange: #1a33af;
   --bs-yellow: #ffc107;
   --bs-green: #198754;
   --bs-teal: #20c997;
@@ -34,7 +36,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #bd5d38;
+  --bs-primary: #383fbd;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -269,12 +271,12 @@ sup {
 }
 
 a {
-  color: #bd5d38;
+  color: #5612de;
   text-decoration: underline;
 }
 
 a:hover {
-  color: #974a2d;
+  color: #000;
 }
 
 a:not([href]):not([class]),
@@ -2645,8 +2647,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked {
-  background-color: #bd5d38;
-  border-color: #bd5d38;
+  background-color: #4538bd;
+  border-color: #5612de;
 }
 
 .form-check-input:checked[type=checkbox] {
@@ -2658,8 +2660,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type=checkbox]:indeterminate {
-  background-color: #bd5d38;
-  border-color: #bd5d38;
+  background-color: #4e38bd;
+  border-color: #5612de;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 
@@ -2750,7 +2752,7 @@ textarea.form-control-lg {
   width: 1rem;
   height: 1rem;
   margin-top: -0.25rem;
-  background-color: #bd5d38;
+  background-color: #4e38bd;
   border: 0;
   border-radius: 1rem;
   -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2783,7 +2785,7 @@ textarea.form-control-lg {
 .form-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #bd5d38;
+  background-color: #4e38bd;
   border: 0;
   border-radius: 1rem;
   -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3308,8 +3310,8 @@ fieldset:disabled .btn {
 .btn-primary:disabled,
 .btn-primary.disabled {
   color: #000;
-  background-color: #bd5d38;
-  border-color: #bd5d38;
+  background-color: #5612de;
+  border-color: #5612de;
 }
 
 .btn-secondary {
@@ -4350,7 +4352,7 @@ fieldset:disabled .btn {
 .dropdown-menu-dark .dropdown-item.active,
 .dropdown-menu-dark .dropdown-item:active {
   color: #fff;
-  background-color: #bd5d38;
+  background-color: #3838bd;
 }
 
 .dropdown-menu-dark .dropdown-item.disabled,
@@ -4492,7 +4494,7 @@ fieldset:disabled .btn {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #bd5d38;
+  color: #4e38bd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -4505,7 +4507,7 @@ fieldset:disabled .btn {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #974a2d;
+  color: #3e2ca4;
 }
 
 .nav-link.disabled {
@@ -4560,7 +4562,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: #fff;
-  background-color: #bd5d38;
+  background-color: #6638bd;
 }
 
 .nav-fill>.nav-link,
@@ -8723,7 +8725,7 @@ fieldset:disabled .btn {
 
 .text-black-50 {
   --bs-text-opacity: 1;
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(0, 0, 0, 50) !important;
 }
 
 .text-white-50 {
@@ -12242,7 +12244,7 @@ fieldset:disabled .btn {
 
 body {
   padding-top: 3.375rem;
-  color: #6c757d;
+  color: #7d6c6e;
 }
 
 @media (min-width: 992px) {
@@ -12322,7 +12324,7 @@ p.lead {
   #sideNav .navbar-brand .img-profile {
     max-width: 10rem;
     max-height: 10rem;
-    border: 0.5rem solid rgba(255, 255, 255, 0.2);
+    border: 0.5rem solid rgba(255, 255, 240, 0.2);
   }
 
   #sideNav .navbar-collapse {
@@ -12431,5 +12433,5 @@ section.resume-section .resume-section-content {
 }
 
 li {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Dancing Script', cursive, 'Lucida Handwriting', 'Brush Script MT', 'Segoe Script', sans-serif;
 }
