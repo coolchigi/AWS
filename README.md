@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center"><b> 👨‍💻 Serverless Resume Website </b></h1>
-💭 I suck at making these things so here goes!
+💭 A step-by-step guide for Cloud Enthusiasts
 </p>
 
 <blockquote>
