@@ -79,6 +79,24 @@ sideNav -> image in picture
   }
 }
 
+.vclead {
+  color: #BC8F8F;
+  text-shadow: 2px 2px #FFDEAD;
+  animation: glow 2s ease-in-out infinite alternate;
+  font-family: 'Dancing Script', cursive, 'Lucida Handwriting', 'Brush Script MT', 'Segoe Script', sans-serif;
+
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #FFDEAD, 0 0 20px #FFDEAD, 0 0 30px #FFDEAD, 0 0 40px #3498db;
+  }
+
+  to {
+    text-shadow: 0 0 20px #FFDEAD, 0 0 30px #FFDEAD, 0 0 40px #FFDEAD, 0 0 50px #FFDEAD, 0 0 60px #FFDEAD;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
