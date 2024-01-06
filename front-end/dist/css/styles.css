@@ -12452,3 +12452,8 @@ section.resume-section .resume-section-content {
 li {
   font-family: 'Dancing Script', cursive, 'Lucida Handwriting', 'Brush Script MT', 'Segoe Script', sans-serif;
 }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black; /* Change this to your preferred color */
+}
