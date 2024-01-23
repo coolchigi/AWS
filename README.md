@@ -23,6 +23,7 @@
     <li><a href="#github-actions">Github Actions</a></li>
     <li><a href="#unit-testing">Unit Testing</a></li>
     <li><a href="#integration-testing">Integration Testing</a></li>
+    <li><a href="#improvements">Improvements</a></li>
     <li><a href="#challenges-closing">Challenges & Closing</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
@@ -360,12 +361,18 @@ Here is an example of some useful AWS CLI queries:
 `aws cloudfront list-distributions` to list CloudFront distributions
 `aws s3 ls` to list buckets in S3
 
-### CI/CD for BackEnd
+### CI/CD for Backend
 I am going to create another workflow such that an update is pushed to the backend code, the tests defined in Python gets run. If the tests pass, the SAM application should get packaged and deployed to AWS
 
 We need to test our Lambda function and API Gateway endpoint respectively. To do this, we'd create a new stage called `dev`
 
 Resource: https://www.mrnice.dev/posts/testing-aws-lambda-and-api-gateway/
+
+### Improvements
+For the future, I am going to improve the frontend with React.
+My plan is
+- Use React to create reusable components for the different sections of the webpage like the Education, Project, Interests etc
+- Manage state and animation
 
 ### Challenges-Closing
 ----------
