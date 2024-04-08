@@ -85,6 +85,11 @@ sam build
 sam deploy --guided
 ```
 
+OR 
+```bash
+sam build && sam deploy
+```
+
 The first command initializes a new application project. The second command will build the source of your application. The third command will package and deploy your application to AWS, with a series of prompts. Follow the prompts
 
 
