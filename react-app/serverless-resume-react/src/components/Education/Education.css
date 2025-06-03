@@ -1,0 +1,87 @@
+.education-section {
+  padding: 6rem 0;
+  min-height: 100vh;
+}
+
+.education-content {
+  max-width: 75rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.education-section-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: #343a40;
+}
+
+.education-items {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.education-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.education-item:last-child {
+  border-bottom: none;
+}
+
+.education-details {
+  max-width: 70%;
+}
+
+.education-institution {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #343a40;
+}
+
+.education-degree {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.education-info {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.education-period {
+  font-size: 1rem;
+  color: #bd5d38;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .education-item {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .education-details {
+    max-width: 100%;
+  }
+
+  .education-institution {
+    font-size: 1.5rem;
+  }
+
+  .education-degree {
+    font-size: 1.1rem;
+  }
+}
