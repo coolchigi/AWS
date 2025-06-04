@@ -5,7 +5,7 @@ interface Project {
   id: number;
   title: string;
   tags: string[];
-  description: string;
+  description: string | string[];
   additionalInfo?: string;
   link?: string;
 }
@@ -139,7 +139,7 @@ const Projects: React.FC = () => {
                       ))}
                     </div>
                     <p className="text-gray-700 text-base leading-relaxed mb-4">
-                      {project.description}
+                      {typeof project.description === 'string' ? project.description : project.description.join(', ')}
                     </p>
                     {project.additionalInfo && (
                       <p className="text-gray-600 text-sm mb-4 pl-4 border-l-4 border-pink-200">
