@@ -1,5 +1,4 @@
 import React from "react";
-import "./Education.css";
 
 interface EducationItemProps {
   institution: string;
@@ -15,13 +14,25 @@ const EducationItem: React.FC<EducationItemProps> = ({
   period
 }) => {
   return (
-    <div className="education-item">
-      <div className="education-details">
-        <h3 className="education-institution">{institution}</h3>
-        <div className="education-degree">{degree}</div>
-        {details && <div className="education-info">{details}</div>}
+    <div className="bg-white rounded-lg shadow-lg p-8 mb-6 hover:shadow-xl transition-shadow duration-300">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+        <div className="flex-grow">
+          <h3 className="text-2xl font-bold text-blue-600 mb-2 font-saira">
+            {institution}
+          </h3>
+          <div className="text-lg text-gray-700 mb-2 font-medium">
+            {degree}
+          </div>
+          {details && (
+            <div className="text-gray-600 pl-4 border-l-4 border-pink-200 bg-blue-50 py-2 pr-4">
+              {details}
+            </div>
+          )}
+        </div>
+        <div className="text-pink-600 font-medium bg-pink-50 px-4 py-2 rounded-full text-sm">
+          {period}
+        </div>
       </div>
-      <div className="education-period">{period}</div>
     </div>
   );
 };
@@ -43,10 +54,12 @@ const Education: React.FC = () => {
   ];
 
   return (
-    <section className="education-section" id="education">
-      <div className="education-content">
-        <h2 className="education-section-title">🎓 Education 🎓</h2>
-        <div className="education-items">
+    <section className="py-24 bg-white" id="education">
+      <div className="max-w-5xl mx-auto px-6">
+        <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira text-center">
+          Education
+        </h2>
+        <div className="space-y-6">
           {educationItems.map((item, index) => (
             <EducationItem
               key={index}

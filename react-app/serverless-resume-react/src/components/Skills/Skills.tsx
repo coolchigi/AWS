@@ -7,7 +7,8 @@ import {
   FaReact,
   FaNodeJs,
   FaAws,
-  FaDocker
+  FaDocker,
+  FaChevronDown
 } from "react-icons/fa";
 import {
   SiKubernetes,
@@ -37,10 +38,10 @@ const Skills: React.FC = () => {
       icon: "brackets-curly",
       experience: "1+ years",
       skills: [
-        { name: "HTML", icon: <FaHtml5 /> },
-        { name: "CSS", icon: <FaCss3 /> },
-        { name: "JavaScript", icon: <FaJs /> },
-        { name: "React", icon: <FaReact /> }
+        { name: "HTML", icon: <FaHtml5 className="text-[#E34F26]" /> },
+        { name: "CSS", icon: <FaCss3 className="text-[#1572B6]" /> },
+        { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" /> },
+        { name: "React", icon: <FaReact className="text-[#61DAFB]" /> }
       ]
     },
     {
@@ -48,11 +49,11 @@ const Skills: React.FC = () => {
       icon: "server-network",
       experience: "2+ years",
       skills: [
-        { name: "Node.js", icon: <FaNodeJs /> },
-        { name: "Express.js", icon: <SiExpress /> },
-        { name: "Python", icon: <FaPython /> },
-        { name: "FastAPI", icon: <SiFastapi /> },
-        { name: "MongoDB", icon: <SiMongodb /> }
+        { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" /> },
+        { name: "Express.js", icon: <SiExpress className="text-gray-700" /> },
+        { name: "Python", icon: <FaPython className="text-[#3776AB]" /> },
+        { name: "FastAPI", icon: <SiFastapi className="text-[#009688]" /> },
+        { name: "MongoDB", icon: <SiMongodb className="text-[#47A248]" /> }
       ]
     },
     {
@@ -60,10 +61,10 @@ const Skills: React.FC = () => {
       icon: "cloud-database-tree",
       experience: "2+ years",
       skills: [
-        { name: "AWS", icon: <FaAws /> },
-        { name: "Docker", icon: <FaDocker /> },
-        { name: "Terraform", icon: <SiTerraform /> },
-        { name: "Kubernetes", icon: <SiKubernetes /> }
+        { name: "AWS", icon: <FaAws className="text-[#FF9900]" /> },
+        { name: "Docker", icon: <FaDocker className="text-[#2496ED]" /> },
+        { name: "Terraform", icon: <SiTerraform className="text-[#7B42BC]" /> },
+        { name: "Kubernetes", icon: <SiKubernetes className="text-[#326CE5]" /> }
       ]
     }
   ];
@@ -77,50 +78,65 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section className="skills-section" id="skills">
-      <div className="skills-content">
-        <h2 className="section-title">Skills</h2>
-        <div className="skills-subtitle"></div>
+    <section className="py-24 bg-white" id="skills">
+      <div className="max-w-5xl mx-auto px-6">
+        <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira text-center">
+          Skills
+        </h2>
 
-        <div className="skills-container">
+        <div className="space-y-6">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className={`skill-category ${
-                activeCategory === index ? "active" : ""
-              }`}
+              className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300"
             >
               <div
-                className="skill-header"
+                className={`p-6 cursor-pointer flex items-center justify-between hover:bg-gray-50 ${
+                  activeCategory === index ? "bg-blue-50" : ""
+                }`}
                 onClick={() => toggleCategory(index)}
               >
-                <div className="skill-icon">
-                  <i className={`uil uil-${category.icon}`}></i>
+                <div className="flex items-center gap-4">
+                  <div className="text-2xl text-blue-600">
+                    <i className={`uil uil-${category.icon}`}></i>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 font-saira">
+                      {category.title}
+                    </h3>
+                    <span className="text-pink-600 text-sm font-medium">
+                      {category.experience}
+                    </span>
+                  </div>
                 </div>
-                <div className="skill-info">
-                  <h3 className="skill-title">{category.title}</h3>
-                  <span className="skill-subtitle">{category.experience}</span>
-                </div>
-                <div className="skill-arrow">
-                  <i
-                    className={`uil uil-angle-down ${
-                      activeCategory === index ? "rotate" : ""
-                    }`}
-                  ></i>
-                </div>
+                <FaChevronDown
+                  className={`text-blue-600 transform transition-transform duration-300 ${
+                    activeCategory === index ? "rotate-180" : ""
+                  }`}
+                />
               </div>
 
-              <div className="skill-list-container">
-                <div className="skill-list">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="skill-item">
-                      <div className="skill-name">
-                        <i className="uil uil-check-circle"></i>
-                        {skill.icon}
-                        {skill.name}
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  activeCategory === index ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                <div className="p-6 bg-gray-50 border-t border-gray-100">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {category.skills.map((skill, skillIndex) => (
+                      <div
+                        key={skillIndex}
+                        className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+                      >
+                        <div className="text-xl">
+                          {skill.icon}
+                        </div>
+                        <span className="text-gray-700 font-medium">
+                          {skill.name}
+                        </span>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
