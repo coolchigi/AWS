@@ -14,6 +14,20 @@ const Experience: React.FC = () => {
 
   const experiences: ExperienceItem[] = [
     {
+      role: "AWS Instructor",
+      company: "The Key",
+      period: "June 2024 - July 2024",
+      description:
+        "Developed and delivered comprehensive AWS curriculum for aspiring cloud practitioners, focusing on foundational services and best practices.",
+      tech: ["AWS", "EC2", "S3", "IAM", "VPC", "Lambda", "CloudWatch"],
+      highlights: [
+        "Created detailed syllabus covering core AWS services and architectural principles",
+        "Guided students through hands-on labs and real-world scenarios in AWS Console",
+        "Emphasized best practices in cloud security and cost optimization",
+        "Mentored students in building serverless applications"
+      ]
+    },
+    {
       role: "Systems Engineer Intern",
       company: "SurveyMonkey",
       period: "May 2024 - Present",
