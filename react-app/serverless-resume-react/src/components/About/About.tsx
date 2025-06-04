@@ -20,7 +20,7 @@ const About: React.FC = () => {
               <span className="text-gray-900">Cloud Engineer</span>
               <span className="text-[#9F2B68]">•</span>
               <span className="text-gray-900">
-                Graduate at Carleton University
+                Carleton University Graduate
               </span>
             </h2>
 
@@ -64,7 +64,7 @@ const About: React.FC = () => {
           <div className="text-blue-500">
             <div className="bg-orange-50 py-6 px-8 rounded-md border-l-4 border-primary mb-8">
               <span className="text-lg font-medium leading-relaxed text-gray-900">
-                A Computer Science (Hon) graduate student at Carleton University
+                A Computer Science (Hon) graduate from Carleton University
                 with a passion for cloud computing, designing scalable systems,
                 and full-stack development.
               </span>
