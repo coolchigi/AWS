@@ -16,13 +16,14 @@ const Interests: React.FC = () => {
         "Cloud Computing",
         "System Design",
         "Full-stack Development",
+        "Tech Speaking & Community",
         "Backend Development"
       ]
     },
     {
       icon: <FaMountain className="text-3xl text-blue-600" />,
       title: "Outdoors",
-      items: ["Mountain Biking", "Soccer", "Hiking", "Exploring"]
+      items: ["Biking", "Soccer", "Hiking", "Exploring"]
     },
     {
       icon: <FaGamepad className="text-3xl text-blue-600" />,
@@ -38,10 +39,10 @@ const Interests: React.FC = () => {
           Interests
         </h2>
 
-        <div className="leading-relaxed font-tagesschrift mb-16 space-y-6 text-lg text-gray-600 leading-relaxed">
+        <div className="leading-relaxed font-tagesschrift mb-16 space-y-6 text-lg text-gray-600">
           <p>
             Apart from being a cloud enthusiast, I enjoy most of my time being
-            outdoors. In the summer, I enjoy mountain biking, playing soccer &
+            outdoors. In the summer, I enjoy biking, playing soccer &
             attending networking conferences. During colder months, I enjoy
             spending time with family and friends. Although, I would love to learn ice skating.
           </p>
@@ -49,6 +50,9 @@ const Interests: React.FC = () => {
             I also love playing video games and journalling. This year, I have
             decided to explore my creative side a bit more. Let's see where the
             journey takes us!
+          </p>
+          <p>
+            I'm passionate about sharing knowledge and contributing to the tech community. In 2023, I had the opportunity to work with Women Who Code, delivering a technical talk on Kubernetes and Docker containerization, sharing practical insights and best practices with fellow developers.
           </p>
         </div>
 
