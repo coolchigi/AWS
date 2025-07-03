@@ -17,7 +17,6 @@ import {
   SiMongodb,
   SiExpress
 } from "react-icons/si";
-import "./Skills.css";
 
 interface SkillCategory {
   title: string;
