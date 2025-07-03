@@ -43,7 +43,7 @@ const Education: React.FC = () => {
       institution: "Carleton University",
       degree: "Bachelor of Computer Science Honours",
       details:
-        "Computer Science - Concentration in Management & Business Systems",
+        "Concentration in Management & Business Systems + Business Minor",
       period: "September 2020 - June 2025"
     },
     {
