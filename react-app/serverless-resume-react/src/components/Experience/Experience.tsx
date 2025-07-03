@@ -14,6 +14,30 @@ const Experience: React.FC = () => {
 
   const experiences: ExperienceItem[] = [
     {
+      role: "Systems Engineer I",
+      company: "SurveyMonkey",
+      period: "June 2025",
+      description:
+        "Cloud infrastructure and deployment automation",
+      tech: ["Terraform", "AWS", "React", "Kubernetes"],
+      highlights: [
+        "Implemented observability modules using Terraform",
+        
+      ]
+    },
+    {
+      role: "Systems Engineer Intern",
+      company: "SurveyMonkey",
+      period: "May 2024 - May 2025",
+      description:
+        "Working on cloud infrastructure and deployment automation, focusing on containerization and monitoring solutions.",
+      tech: ["Terraform", "AWS", "React", "Kubernetes"],
+      highlights: [
+        "Developed infrastructure monitoring solutions using Terraform and AWS Lambda",
+        "Building company-wide reference applications for Python+React systems"
+      ]
+    },
+    {
       role: "AWS Instructor",
       company: "The Key",
       period: "June 2024 - July 2024",
@@ -25,18 +49,6 @@ const Experience: React.FC = () => {
         "Guided students through hands-on labs and real-world scenarios in AWS Console",
         "Emphasized best practices in cloud security and cost optimization",
         "Mentored students in building serverless applications"
-      ]
-    },
-    {
-      role: "Systems Engineer Intern",
-      company: "SurveyMonkey",
-      period: "May 2024 - Present",
-      description:
-        "Working on cloud infrastructure and deployment automation, focusing on containerization and monitoring solutions.",
-      tech: ["Terraform", "AWS", "React", "Kubernetes"],
-      highlights: [
-        "Developed infrastructure monitoring solutions using Terraform and AWS Lambda",
-        "Building company-wide reference applications for Python+React systems"
       ]
     },
     {
