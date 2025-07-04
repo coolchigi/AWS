@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - react-app/serverless-resume-react/**
+  workflow_dispatch:
 
 jobs:
   deploy-and-invalidate:
