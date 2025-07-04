@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
       description: "An automatic defibrillator simulation built using QT C++",
       additionalInfo:
         "Simulate an automatic external defibrillator that can be used to deliver a shock in life threating situations",
-      link: "https://github.com/coolchigi/MediFind"
+      link: "https://github.com/WaillyMohamed/AED"
     },
     {
       id: 3,
