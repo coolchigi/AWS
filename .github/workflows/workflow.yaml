@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - front-end/**
+      - react-app/serverless-resume-react/**
 
 jobs:
   deploy-and-invalidate:
@@ -12,6 +12,21 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd react-app/serverless-resume-react
+          npm ci
+
+      - name: Build React app
+        run: |
+          cd react-app/serverless-resume-react
+          npm run build
 
       # Upload to S3
       - name: Upload to S3 bucket
@@ -24,7 +39,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "us-east-1"
-          SOURCE_DIR: "front-end"
+          SOURCE_DIR: "react-app/serverless-resume-react/dist"
 
       # Invalidate Cloudfront distribution and push
       - name: invalidate
