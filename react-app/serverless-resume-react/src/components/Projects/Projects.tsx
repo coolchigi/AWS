@@ -13,6 +13,16 @@ interface Project {
 const Projects: React.FC = () => {
   const projects: Project[] = [
     {
+      id: 0,
+      title: "MapleTrade",
+      tags: ["Fullstack", "Cloud"],
+      description:
+        "A agentic trading application built using Google ADK + Gemini",
+      additionalInfo:
+        "The aim was to make trading more accessible to users",
+      link: "https://github.com/coolchigi/MapleTrade"
+    },
+    {
       id: 1,
       title: "MediFind",
       tags: ["Fullstack", "Cloud"],
