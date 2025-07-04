@@ -1,0 +1,7 @@
+/* Root variables for consistent theming */
+/* Import Font Awesome for icons */
+@import url("https://fonts.googleapis.com/css2?family=Tagesschrift&display=swap");
+@import "tailwindcss";
+@theme {
+  --font-tagesschrift: "Tagesschrift", sans-serif;
+}
