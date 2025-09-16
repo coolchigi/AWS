@@ -357,7 +357,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "us-east-1"
-          SOURCE_DIR: "front-end"
+          SOURCE_DIR: "frontend"
 ```
 - To use this GitHub Action, you will need to create four different secrets: `DISTRIBUTION_FRONT`, `AWS_S3_BUCKET`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY`. To create a secret, go to your repository, navigate to "Settings" > "Secret & Variables" > "Actions" > "Create new secret". Enter in the name and the value. You can get the values by either logging into the AWS console or using the AWS CLI to perform a query.
 

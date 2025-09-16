@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - react-app/serverless-resume-react/**
+      - frontend/serverless-resume-react/**
   workflow_dispatch:
 
 jobs:
@@ -21,12 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd react-app/serverless-resume-react
+          cd frontend/serverless-resume-react
           npm ci
 
       - name: Build React app
         run: |
-          cd react-app/serverless-resume-react
+          cd frontend/serverless-resume-react
           npm run build
         env:
           VITE_API_GATEWAY_URL: ${{ secrets.VITE_API_GATEWAY_URL }}
@@ -42,7 +42,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "us-east-1"
-          SOURCE_DIR: "react-app/serverless-resume-react/dist"
+          SOURCE_DIR: "frontend/serverless-resume-react/dist"
 
       # Invalidate Cloudfront distribution and push
       - name: invalidate
