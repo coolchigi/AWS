@@ -27,7 +27,6 @@ const Awards: React.FC = () => {
       title: "AWS Certified AI Practitioner",
       image: aiPractitioner,
       link: "https://www.credly.com/badges/58b81f6e-19af-484b-9048-b5b39d8103b7/public_url",
-      isPlaceholder: true
     },
     {
       title: "Coming Soon",
