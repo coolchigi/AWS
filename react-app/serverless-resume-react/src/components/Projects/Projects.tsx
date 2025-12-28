@@ -196,8 +196,6 @@ const Projects: React.FC = () => {
             />
           ))}
         </div>
-
-        <div>Current direction: {direction}</div>
       </div>
     </section>
   );
