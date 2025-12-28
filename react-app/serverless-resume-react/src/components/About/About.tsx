@@ -72,19 +72,20 @@ const About: React.FC = () => {
 
             <div className="space-y-6 text-gray-700">
               <p className="text-base leading-relaxed font-tagesschrift">
-                In 2022, I decided to delve into the realm of cloud computing by
-                obtaining AWS certifications. This was a significant departure
-                from my previous experiences, but it proved to be a rewarding
-                decision. I was fortunate to secure an internship as a Cloud
-                Solutions Intern at SurveyMonkey, where I expanded my knowledge
-                of Kubernetes and Terraform under the mentorship of seasoned
-                professionals.
+                In 2022, I decided to delve into the world of cloud computing by
+                obtaining AWS certifications. I read a post that said the best way to learn
+                AWS, was to get some hands-on experience. So, that's what I did!
+                This was quite the jump from software development--an experience I had gotten through 
+                personal projects, but it proved to be a rewarding decision.
+                I was fortunate to secure an internship as a Cloud
+                Solutions Intern at SurveyMonkey, where I expanded my knowledge of AWS,
+                Kubernetes and Terraform. These were tools I had never used before, which led to where I am today.
               </p>
               <p className="text-base leading-relaxed font-tagesschrift">
-                Despite the high barrier to entry in cloud computing, especially
-                for students, my curiosity drove me to overcome these
-                challenges. With experience in leveraging AWS cloud
-                infrastructure, I am eager to apply my skills to develop
+                A lot of students don't pursue cloud computing due to the high barrier 
+                of entry. I told a mentor, "Certain skills require on the job exposure" or at least, that's 
+                how it felt with DevOps tools. I can now confidently say, I have experience in leveraging AWS cloud
+                infrastructure & I am eager to apply my skills to develop
                 innovative solutions 💡.
               </p>
             </div>
