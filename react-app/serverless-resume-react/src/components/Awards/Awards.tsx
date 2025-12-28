@@ -2,6 +2,7 @@ import React from "react";
 import { FaTrophy } from "react-icons/fa";
 import cloudPractitioner from "../../assets/img/aws-certified-cloud-practitioner.png";
 import solutionsArchitect from "../../assets/img/aws-certified-solutions-architect-associate.png";
+import aiPractitioner from "../../assets/img/aws-certified-ai-practitioner.png";
 
 interface Certification {
   title: string;
@@ -23,9 +24,9 @@ const Awards: React.FC = () => {
       link: "https://www.credly.com/badges/876a2eef-b396-408d-86ff-811da7f10d5a/public_url"
     },
     {
-      title: "Coming Soon",
-      image: "",
-      link: "#",
+      title: "AWS Certified AI Practitioner",
+      image: aiPractitioner,
+      link: "https://www.credly.com/badges/58b81f6e-19af-484b-9048-b5b39d8103b7/public_url",
       isPlaceholder: true
     },
     {
