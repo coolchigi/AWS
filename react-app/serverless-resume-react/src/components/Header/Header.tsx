@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import profilePic from "../../assets/img/profile-pic.jpeg";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,7 +60,7 @@ const Header: React.FC = () => {
           >
             <img
               className="h-auto w-auto max-h-20 max-w-20 rounded-full"
-              src="/src/assets/img/profile-pic.jpeg"
+              src={profilePic}
               alt="Chigozirim Eke"
             />
           </a>
