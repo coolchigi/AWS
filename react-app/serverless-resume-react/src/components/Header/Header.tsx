@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import profilePic from "../../assets/img/profile-pic.jpeg";
+
+// Scroll offset constant for better maintainability
+const SCROLL_OFFSET = 100;
+const THROTTLE_DELAY = 100; // milliseconds
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,32 +25,47 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
+    const sections = [
+      "about",
+      "experience",
+      "projects",
+      "education",
+      "skills",
+      "interests",
+      "awards"
+    ];
+
     const handleScroll = () => {
-      const sections = [
-        "about",
-        "projects",
-        "education",
-        "skills",
-        "interests",
-        "awards"
-      ];
-
-      const currentSection = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-
-      if (currentSection) {
-        setActiveSection(currentSection);
+      // Throttle scroll events for better performance
+      if (scrollTimeoutRef.current !== null) {
+        return;
       }
+
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        const currentSection = sections.find((section) => {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top <= SCROLL_OFFSET && rect.bottom >= SCROLL_OFFSET;
+          }
+          return false;
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection);
+        }
+
+        scrollTimeoutRef.current = null;
+      }, THROTTLE_DELAY);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current !== null) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -67,9 +87,10 @@ const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden ml-4 p-2 rounded-lg hover:bg-gray-100"
+            className="md:hidden ml-4 p-2 rounded-lg hover:bg-pink-800 text-white"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            <i className={`fas ${isMenuOpen ? "fa-times" : "fa-bars"}`}></i>
+            <i className={`uil ${isMenuOpen ? "uil-times" : "uil-bars"} text-2xl`}></i>
           </button>
         </div>
 
