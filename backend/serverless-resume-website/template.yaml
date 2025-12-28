@@ -38,3 +38,18 @@ Resources:
         - AttributeName: "ID"
           KeyType: "HASH"
       BillingMode: PAY_PER_REQUEST
+
+# Outputs section - makes deployment info available
+# Why: Allows CI/CD to verify deployment and get API URL
+Outputs:
+  ApiURL:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
+  LambdaFunctionArn:
+    Description: "Lambda Function ARN"
+    Value: !GetAtt ResumePutCountFunction.Arn
+
+  DynamoDBTableName:
+    Description: "DynamoDB Table Name"
+    Value: !Ref CounterTable
