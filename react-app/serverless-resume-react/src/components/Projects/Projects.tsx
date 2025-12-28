@@ -87,17 +87,14 @@ const Projects: React.FC = () => {
   ];
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [direction, setDirection] = useState<'next' | 'prev'>('next');
 
   const handlePrev = () => {
-    setDirection('prev');
     setActiveIndex((prevIndex) =>
       prevIndex === 0 ? projects.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
-    setDirection('next');
     setActiveIndex((prevIndex) =>
       prevIndex === projects.length - 1 ? 0 : prevIndex + 1
     );
