@@ -7,7 +7,7 @@ import boto3
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# Initialize DynamoDB resource
+# Initialize DynamoDB resource # Testing CI/CD
 dynamodb = boto3.resource('dynamodb')
 table_name = 'visitorsCountTable'
 table = dynamodb.Table(table_name)
