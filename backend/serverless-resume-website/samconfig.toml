@@ -9,8 +9,7 @@ capabilities = "CAPABILITY_IAM"
 disable_rollback = true
 image_repositories = []
 parameter_overrides = "Env=\"dev\""
-confirm_changeset = true
-resolve_s3 = true
+confirm_changeset = false
 
 [default.global.parameters]
 region = "us-east-1"
