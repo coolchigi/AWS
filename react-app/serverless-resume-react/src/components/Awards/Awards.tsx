@@ -2,7 +2,7 @@ import React from "react";
 import { FaTrophy } from "react-icons/fa";
 import cloudPractitioner from "../../assets/img/aws-certified-cloud-practitioner.png";
 import solutionsArchitect from "../../assets/img/aws-certified-solutions-architect-associate.png";
-import aiPractitioner from "../../assets/img/aws-certified-ai-practitioner.jpg";
+import aiPractitioner from "../../assets/img/aws-certified-ai-practitioner.png";
 
 interface Certification {
   title: string;
