@@ -54,7 +54,7 @@ const Education: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-white" id="education">
+    <section className="py-12 bg-white" id="education">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira text-center">
           Education
