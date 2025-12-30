@@ -43,4 +43,21 @@ jobs:
           sam deploy \
             --no-confirm-changeset \
             --no-fail-on-empty-changeset
-
+      
+      - name: Verify deployment
+        run: |
+          STACK_NAME="serverless-resume-web-app"
+          API_URL=$(aws cloudformation describe-stacks \
+            --stack-name $STACK_NAME \
+            --query 'Stacks[0].Outputs[?OutputKey==`ApiURL`].OutputValue' \
+            --output text)
+          
+          echo "Testing API at: ${API_URL}counter"
+          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${API_URL}counter)
+          
+          if [ $RESPONSE_CODE -eq 200 ]; then
+            echo "✅ Health check passed! API is working."
+          else
+            echo "❌ Health check failed with status: $RESPONSE_CODE"
+            exit 1
+          fi
