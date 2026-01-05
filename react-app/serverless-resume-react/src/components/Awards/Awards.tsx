@@ -26,7 +26,7 @@ const Awards: React.FC = () => {
     {
       title: "AWS Certified AI Practitioner",
       image: aiPractitioner,
-      link: "https://www.credly.com/badges/58b81f6e-19af-484b-9048-b5b39d8103b7/public_url",
+      link: "https://www.credly.com/badges/58b81f6e-19af-484b-9048-b5b39d8103b7/public_url"
     },
     {
       title: "Coming Soon",
@@ -43,25 +43,26 @@ const Awards: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-white" id="awards">
+    <section className="py-12 bg-white scroll-mt-20" id="awards">
       <div className="max-w-5xl mx-auto px-6">
-        <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira text-center">
+        <h2 className="text-4xl font-bold uppercase mb-8 text-gray-800 font-saira text-center">
           Awards & Certifications
         </h2>
 
-        <div className="space-y-16">
+        <div className="space-y-12">
+          {/* AWS Certifications Grid */}
           <div>
-            <h3 className="text-2xl font-saira text-blue-600 mb-8 text-center">
+            <h3 className="text-2xl font-saira text-blue-600 mb-6 text-center">
               AWS Certifications
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {certifications.map((cert, index) => (
                 cert.isPlaceholder ? (
                   <div
                     key={index}
-                    className="w-48 h-48 rounded-lg bg-gray-100 flex items-center justify-center border-2 border-dashed border-gray-300"
+                    className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center min-h-[220px] hover:bg-gray-100 transition-colors"
                   >
-                    <span className="text-gray-400 font-saira text-center">
+                    <span className="text-gray-400 font-saira text-center text-sm">
                       Future Certification<br/>Coming Soon
                     </span>
                   </div>
@@ -71,33 +72,38 @@ const Awards: React.FC = () => {
                     href={cert.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="transform hover:scale-105 transition-transform duration-300"
-                    title={cert.title}
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-xl hover:border-blue-400 transition-all duration-300 group flex flex-col items-center"
                   >
-                    <img 
-                      src={cert.image} 
-                      alt={cert.title}
-                      className="w-48 h-48 object-contain"
-                    />
+                    <div className="w-full h-40 flex items-center justify-center mb-3">
+                      <img 
+                        src={cert.image} 
+                        alt={cert.title}
+                        className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <p className="text-xs text-center text-gray-700 font-medium leading-tight">
+                      {cert.title}
+                    </p>
                   </a>
                 )
               ))}
             </div>
           </div>
 
+          {/* Academic Achievements Grid */}
           <div>
-            <h3 className="text-2xl font-saira text-blue-600 mb-8 text-center">
+            <h3 className="text-2xl font-saira text-blue-600 mb-6 text-center">
               Academic Achievements
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {awards.map((award, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg hover:border-pink-400 transition-all duration-300"
                 >
-                  <div className="flex items-center gap-4">
-                    <FaTrophy className="text-pink-600 text-2xl flex-shrink-0" />
-                    <span className="text-gray-700 font-medium">{award}</span>
+                  <div className="flex items-center gap-3">
+                    <FaTrophy className="text-pink-600 text-lg flex-shrink-0" />
+                    <span className="text-gray-700 font-medium text-sm">{award}</span>
                   </div>
                 </div>
               ))}
@@ -108,5 +114,4 @@ const Awards: React.FC = () => {
     </section>
   );
 };
-
 export default Awards;
