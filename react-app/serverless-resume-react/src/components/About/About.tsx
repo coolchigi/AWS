@@ -71,7 +71,7 @@ const About: React.FC = () => {
             </div>
 
             <div className="space-y-6 text-gray-700">
-              <p className="text-base leading-relaxed font-tagesschrift">
+              <p className="text-base leading-relaxed">
                 In 2022, I decided to delve into the world of cloud computing by
                 obtaining AWS certifications. I read a post that said the best way to learn
                 AWS, was to get some hands-on experience. So, that's what I did!
@@ -81,7 +81,7 @@ const About: React.FC = () => {
                 Solutions Intern at SurveyMonkey, where I expanded my knowledge of AWS,
                 Kubernetes and Terraform. These were tools I had never used before, which led to where I am today.
               </p>
-              <p className="text-base leading-relaxed font-tagesschrift">
+              <p className="text-base leading-relaxed">
                 A lot of students don't pursue cloud computing due to the high barrier 
                 of entry. I told a mentor, "Certain skills require on the job exposure" or at least, that's 
                 how it felt with DevOps tools. I can now confidently say, I have experience in leveraging AWS cloud
