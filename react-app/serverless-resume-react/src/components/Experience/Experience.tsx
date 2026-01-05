@@ -16,7 +16,7 @@ const Experience: React.FC = () => {
     {
       role: "Systems Engineer I",
       company: "SurveyMonkey",
-      period: "June 2025",
+      period: "June 2025 - Present",
       description:
         "Cloud infrastructure and deployment automation",
       tech: ["Terraform", "AWS", "React", "Kubernetes"],
@@ -90,7 +90,7 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <section className="min-h-screen px-20 py-24 bg-gray-50" id="experience">
+     <section className="px-20 py-12 bg-gray-50" id="experience">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira">
           Experience
@@ -151,7 +151,7 @@ const Experience: React.FC = () => {
                   {exp.tech.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm font-courier"
+                      className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm"
                     >
                       {tech}
                     </span>
