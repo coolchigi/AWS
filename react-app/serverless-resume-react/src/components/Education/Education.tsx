@@ -50,8 +50,7 @@ const Education: React.FC = () => {
     </div>
   </div>
 </section>
-
-  )
-}
+  );
+};
 
 export default Education;
