@@ -27,7 +27,7 @@ const Projects: React.FC = () => {
       title: "MediFind",
       tags: ["Fullstack", "Cloud"],
       description:
-        "A fullstack application built using React, AWS Amplify Studio & AWS Appsync",
+        "Fullstack application built using React, AWS Amplify Studio & AWS AppSync",
       additionalInfo:
         "The aim was to make healthcare provider data more accessible to users",
       link: "https://github.com/coolchigi/MediFind"
