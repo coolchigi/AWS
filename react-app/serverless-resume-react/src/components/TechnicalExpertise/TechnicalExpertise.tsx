@@ -105,7 +105,7 @@ const TechnicalExpertise: React.FC = () => {
 
         {/* Project Details */}
         <div className="bg-white rounded-lg shadow-lg p-8">
-          {activeProject !== null && projects[activeProject] && (
+          {projects[activeProject] && (
             <div>
               <h3 className="text-2xl font-bold text-blue-600 mb-4 font-saira uppercase">
                 {projects[activeProject].title}
