@@ -105,24 +105,19 @@ const TechnicalExpertise: React.FC = () => {
 
         {/* Project Details */}
         <div className="bg-white rounded-lg shadow-lg p-8">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`${
-                activeProject === index ? "block" : "hidden"
-              }`}
-            >
+          {projects[activeProject] && (
+            <div>
               <h3 className="text-2xl font-bold text-blue-600 mb-4 font-saira uppercase">
-                {project.title}
+                {projects[activeProject].title}
               </h3>
 
               <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                {project.description}
+                {projects[activeProject].description}
               </p>
 
-              {project.additionalInfo && (
+              {projects[activeProject].additionalInfo && (
                 <p className="text-gray-600 text-base mb-6 pl-4 border-l-4 border-pink-200 bg-blue-50 py-3 pr-4">
-                  {project.additionalInfo}
+                  {projects[activeProject].additionalInfo}
                 </p>
               )}
 
@@ -132,7 +127,7 @@ const TechnicalExpertise: React.FC = () => {
                   Tech Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, techIndex) => (
+                  {projects[activeProject].techStack.map((tech, techIndex) => (
                     <span
                       key={techIndex}
                       className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium border border-gray-200"
@@ -144,9 +139,9 @@ const TechnicalExpertise: React.FC = () => {
               </div>
 
               {/* View Project Link */}
-              {project.link && (
+              {projects[activeProject].link && (
                 <a
-                  href={project.link}
+                  href={projects[activeProject].link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
@@ -156,7 +151,7 @@ const TechnicalExpertise: React.FC = () => {
                 </a>
               )}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
