@@ -29,7 +29,6 @@ const Header: React.FC = () => {
       "about",
       "experience",
       "technical-expertise",
-      "education",
       "interests",
       "awards"
     ];
