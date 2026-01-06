@@ -22,9 +22,9 @@ const TechnicalExpertise: React.FC = () => {
     {
       id: 1,
       title: "MediFind",
-      description: "Fullstack application built using React, AWS Amplify Studio & AWS Appsync",
-      additionalInfo: "The aim was to make healthcare provider data more accessible to users",
-      techStack: ["React", "AWS Amplify", "AppSync", "DynamoDB"],
+      description: "Fullstack application built using React, AWS Amplify Studio & AWS AppSync",
+      additionalInfo: "The aim was to make healthcare provider data more accessible to Canadians",
+      techStack: ["React", "AWS Amplify", "AWS AppSync", "DynamoDB"],
       link: "https://github.com/coolchigi/MediFind"
     },
     {
@@ -75,7 +75,7 @@ const TechnicalExpertise: React.FC = () => {
     }
   ];
 
-  const [activeProject, setActiveProject] = useState<number>(0);
+  const [activeProjectIndex, setActiveProject] = useState<number>(0);
 
   return (
     <section className="py-12 bg-gray-50 scroll-mt-20" id="technical-expertise">
@@ -86,13 +86,18 @@ const TechnicalExpertise: React.FC = () => {
 
         {/* Horizontal Project Tabs */}
         <div className="overflow-x-auto mb-8">
-          <div className="flex gap-2 min-w-max pb-2">
+          <div className="flex gap-2 min-w-max pb-2" role="tablist" aria-label="Project navigation">
             {projects.map((project, index) => (
               <button
                 key={project.id}
+                id={`project-tab-${project.id}`}
                 onClick={() => setActiveProject(index)}
+                role="tab"
+                aria-selected={activeProjectIndex === index}
+                aria-controls={`project-panel-${project.id}`}
+                tabIndex={activeProjectIndex === index ? 0 : -1}
                 className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 whitespace-nowrap ${
-                  activeProject === index
+                  activeProjectIndex === index
                     ? "bg-blue-600 text-white shadow-lg"
                     : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
@@ -105,24 +110,23 @@ const TechnicalExpertise: React.FC = () => {
 
         {/* Project Details */}
         <div className="bg-white rounded-lg shadow-lg p-8">
-          {projects.map((project, index) => (
+          {activeProjectIndex < projects.length && (
             <div
-              key={project.id}
-              className={`${
-                activeProject === index ? "block" : "hidden"
-              }`}
+              id={`project-panel-${projects[activeProjectIndex].id}`}
+              role="tabpanel"
+              aria-labelledby={`project-tab-${projects[activeProjectIndex].id}`}
             >
               <h3 className="text-2xl font-bold text-blue-600 mb-4 font-saira uppercase">
-                {project.title}
+                {projects[activeProjectIndex].title}
               </h3>
 
               <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                {project.description}
+                {projects[activeProjectIndex].description}
               </p>
 
-              {project.additionalInfo && (
+              {projects[activeProjectIndex].additionalInfo && (
                 <p className="text-gray-600 text-base mb-6 pl-4 border-l-4 border-pink-200 bg-blue-50 py-3 pr-4">
-                  {project.additionalInfo}
+                  {projects[activeProjectIndex].additionalInfo}
                 </p>
               )}
 
@@ -132,7 +136,7 @@ const TechnicalExpertise: React.FC = () => {
                   Tech Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, techIndex) => (
+                  {projects[activeProjectIndex].techStack.map((tech, techIndex) => (
                     <span
                       key={techIndex}
                       className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg text-sm font-medium border border-gray-200"
@@ -144,9 +148,9 @@ const TechnicalExpertise: React.FC = () => {
               </div>
 
               {/* View Project Link */}
-              {project.link && (
+              {projects[activeProjectIndex].link && (
                 <a
-                  href={project.link}
+                  href={projects[activeProjectIndex].link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
@@ -156,7 +160,7 @@ const TechnicalExpertise: React.FC = () => {
                 </a>
               )}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
