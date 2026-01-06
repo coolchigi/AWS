@@ -75,7 +75,7 @@ const TechnicalExpertise: React.FC = () => {
     }
   ];
 
-  const [activeProject, setActiveProject] = useState<number>(0);
+  const [activeProjectIndex, setActiveProjectIndex] = useState<number>(0);
 
   return (
     <section className="py-12 bg-gray-50 scroll-mt-20" id="technical-expertise">
@@ -86,13 +86,17 @@ const TechnicalExpertise: React.FC = () => {
 
         {/* Horizontal Project Tabs */}
         <div className="overflow-x-auto mb-8">
-          <div className="flex gap-2 min-w-max pb-2">
+          <div className="flex gap-2 min-w-max pb-2" role="tablist">
             {projects.map((project, index) => (
               <button
                 key={project.id}
-                onClick={() => setActiveProject(index)}
+                onClick={() => setActiveProjectIndex(index)}
+                role="tab"
+                aria-selected={activeProjectIndex === index}
+                aria-controls={`project-panel-${project.id}`}
+                aria-label={`View ${project.title} details`}
                 className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 whitespace-nowrap ${
-                  activeProject === index
+                  activeProjectIndex === index
                     ? "bg-blue-600 text-white shadow-lg"
                     : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
@@ -108,8 +112,11 @@ const TechnicalExpertise: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={project.id}
+              id={`project-panel-${project.id}`}
+              role="tabpanel"
+              aria-labelledby={`project-tab-${project.id}`}
               className={`${
-                activeProject === index ? "block" : "hidden"
+                activeProjectIndex === index ? "block" : "hidden"
               }`}
             >
               <h3 className="text-2xl font-bold text-blue-600 mb-4 font-saira uppercase">
