@@ -33,13 +33,13 @@ const Interests: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-white" id="interests">
+    <section className="py-12 bg-white" id="interests">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira text-center">
           Interests
         </h2>
 
-        <div className="leading-relaxed font-tagesschrift mb-16 space-y-6 text-lg text-gray-600">
+        <div className="leading-relaxed mb-16 space-y-6 text-lg text-gray-600">
           <p>
             Apart from being a cloud enthusiast, I enjoy most of my time being
             outdoors. In the summer, I enjoy biking, playing soccer &

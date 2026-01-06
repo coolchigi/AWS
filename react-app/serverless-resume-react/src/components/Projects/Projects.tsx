@@ -27,7 +27,7 @@ const Projects: React.FC = () => {
       title: "MediFind",
       tags: ["Fullstack", "Cloud"],
       description:
-        "A fullstack application built using React, AWS Amplify Studio & AWS Appsync",
+        "Fullstack application built using React, AWS Amplify Studio & AWS AppSync",
       additionalInfo:
         "The aim was to make healthcare provider data more accessible to users",
       link: "https://github.com/coolchigi/MediFind"
@@ -101,7 +101,7 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-white" id="projects">
+    <section className="py-12 bg-white" id="projects">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-bold uppercase mb-12 text-gray-800 font-saira text-center">
           Projects
@@ -139,7 +139,7 @@ const Projects: React.FC = () => {
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="bg-blue-50 text-blue-600 text-sm px-3 py-1 rounded-full capitalize font-courier border border-blue-200"
+                          className="bg-blue-50 text-blue-600 text-sm px-3 py-1 rounded-full capitalize border border-blue-200"
                         >
                           {tag}
                         </span>

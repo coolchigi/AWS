@@ -28,9 +28,7 @@ const Header: React.FC = () => {
     const sections = [
       "about",
       "experience",
-      "projects",
-      "education",
-      "skills",
+      "technical-expertise",
       "interests",
       "awards"
     ];
@@ -69,7 +67,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full bg-[#9F2B68] text-white z-50 px-6 py-4">
+    <nav className="fixed top-0 w-full bg-[#9F2B68] text-white z-50 px-6 py-1">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo/Brand */}
         <div className="flex items-center">
@@ -79,7 +77,7 @@ const Header: React.FC = () => {
             className="flex items-center space-x-2 text-blue-500"
           >
             <img
-              className="h-auto w-auto max-h-20 max-w-20 rounded-full"
+              className="h-32 w-32 rounded-full -my-8 relative z-10 border-4 border-white shadow-xl"
               src={profilePic}
               alt="Chigozirim Eke"
             />
@@ -100,9 +98,8 @@ const Header: React.FC = () => {
             {[
               "about",
               "experience",
-              "projects",
+              "technical-expertise",
               "education",
-              "skills",
               "interests",
               "awards"
             ].map((section) => (
@@ -110,7 +107,7 @@ const Header: React.FC = () => {
                 <a
                   href={`#${section}`}
                   onClick={() => handleNavLinkClick(section)}
-                  className={`block py-2 px-4 capitalize transition-colors duration-200
+                  className={`block py-0 px-4 capitalize transition-colors duration-200
         ${
           activeSection === section
             ? "text-white font-bold"
@@ -118,7 +115,7 @@ const Header: React.FC = () => {
         }
         hover:text-white`}
                 >
-                  {section}
+                  {section === "technical-expertise" ? "expertise" : section}
                 </a>
               </li>
             ))}
