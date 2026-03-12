@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import profilePic from "../../assets/img/profile-pic.jpeg";
 
 // Scroll offset constant for better maintainability
@@ -29,8 +30,6 @@ const Header: React.FC = () => {
       "about",
       "experience",
       "technical-expertise",
-      "interests",
-      "awards"
     ];
 
     const handleScroll = () => {
@@ -96,29 +95,34 @@ const Header: React.FC = () => {
         <div className={`${isMenuOpen ? "block" : "hidden"} md:block`}>
           <ul className="flex flex-col md:flex-row md:space-x-8">
             {[
-              "about",
-              "experience",
-              "technical-expertise",
-              "education",
-              "interests",
-              "awards"
-            ].map((section) => (
-              <li key={section}>
+              { id: "about", label: "About" },
+              { id: "experience", label: "Experience" },
+              { id: "technical-expertise", label: "Projects" },
+            ].map(({ id, label }) => (
+              <li key={id}>
                 <a
-                  href={`#${section}`}
-                  onClick={() => handleNavLinkClick(section)}
-                  className={`block py-0 px-4 capitalize transition-colors duration-200
+                  href={`#${id}`}
+                  onClick={() => handleNavLinkClick(id)}
+                  className={`block py-0 px-4 transition-colors duration-200
         ${
-          activeSection === section
+          activeSection === id
             ? "text-white font-bold"
             : "text-blue-500 font-bold"
         }
         hover:text-white`}
                 >
-                  {section === "technical-expertise" ? "expertise" : section}
+                  {label}
                 </a>
               </li>
             ))}
+            <li>
+              <Link
+                to="/blog"
+                className="block py-0 px-4 text-blue-500 font-bold transition-colors duration-200 hover:text-white"
+              >
+                Blog
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
