@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import profilePic from "../../assets/img/profile-pic.jpeg";
 
 // Scroll offset constant for better maintainability
@@ -10,6 +10,8 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const scrollTimeoutRef = useRef<number | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,6 +20,12 @@ const Header: React.FC = () => {
   const handleNavLinkClick = (section: string) => {
     setActiveSection(section);
     setIsMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      // Navigate to home page — browser will scroll to the anchor
+      navigate(`/#${section}`);
+      return;
+    }
 
     const element = document.getElementById(section);
     if (element) {
@@ -71,7 +79,7 @@ const Header: React.FC = () => {
         {/* Logo/Brand */}
         <div className="flex items-center">
           <a
-            href="#about"
+            href="/#about"
             onClick={() => handleNavLinkClick("about")}
             className="flex items-center space-x-2 text-blue-500"
           >
@@ -101,7 +109,7 @@ const Header: React.FC = () => {
             ].map(({ id, label }) => (
               <li key={id}>
                 <a
-                  href={`#${id}`}
+                  href={`/#${id}`}
                   onClick={() => handleNavLinkClick(id)}
                   className={`block py-0 px-4 transition-colors duration-200
         ${
