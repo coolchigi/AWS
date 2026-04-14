@@ -46,18 +46,53 @@ jobs:
       
       - name: Verify deployment
         run: |
+          set -euo pipefail
+
           STACK_NAME="serverless-resume-web-app"
-          API_URL=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`ApiURL`].OutputValue' \
-            --output text)
-          
+
+          echo "Fetching CloudFormation outputs for stack: $STACK_NAME"
+          aws cloudformation describe-stacks --stack-name "$STACK_NAME" \
+            --query 'Stacks[0].Outputs' --output table || true
+
+          # Try common output keys
+          API_URL="$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiUrl' || OutputKey=='ApiURL' || OutputKey=='ApiEndpoint' || OutputKey=='ServerlessRestApi'].OutputValue | [0]" \
+            --output text || true)"
+
+          API_URL="$(echo "${API_URL:-}" | xargs || true)"
+
+          # Fallback: derive URL from SAM implicit API if no output is present
+          if [ -z "${API_URL:-}" ] || [ "$API_URL" = "None" ] || [ "$API_URL" = "null" ]; then
+            REST_API_ID="$(aws cloudformation describe-stack-resources \
+              --stack-name "$STACK_NAME" \
+              --query "StackResources[?LogicalResourceId=='ServerlessRestApi'].PhysicalResourceId | [0]" \
+              --output text || true)"
+
+            REST_API_ID="$(echo "${REST_API_ID:-}" | xargs || true)"
+            if [ -n "${REST_API_ID:-}" ] && [ "$REST_API_ID" != "None" ] && [ "$REST_API_ID" != "null" ]; then
+              API_URL="https://${REST_API_ID}.execute-api.${AWS_REGION}.amazonaws.com/Prod/"
+            fi
+          fi
+
+          if [ -z "${API_URL:-}" ] || [ "$API_URL" = "None" ] || [ "$API_URL" = "null" ]; then
+            echo "ERROR: Could not find API URL in CloudFormation outputs."
+            echo "Fix by ensuring your SAM template defines an Output key like ApiUrl."
+            exit 1
+          fi
+
+          # Ensure trailing slash
+          case "$API_URL" in
+            */) ;;
+            *) API_URL="${API_URL}/" ;;
+          esac
+
           echo "Testing API at: ${API_URL}counter"
-          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${API_URL}counter)
-          
-          if [ $RESPONSE_CODE -eq 200 ]; then
-            echo "✅ Health check passed! API is working."
+          RESPONSE_CODE="$(curl -s -o /dev/null -w "%{http_code}" "${API_URL}counter")"
+
+          if [ "$RESPONSE_CODE" -eq 200 ]; then
+            echo "Health check passed! API is working."
           else
-            echo "❌ Health check failed with status: $RESPONSE_CODE"
+            echo "Health check failed with status: $RESPONSE_CODE"
             exit 1
           fi
