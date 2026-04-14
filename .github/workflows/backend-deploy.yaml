@@ -46,18 +46,38 @@ jobs:
       
       - name: Verify deployment
         run: |
+          set -euo pipefail
+
           STACK_NAME="serverless-resume-web-app"
-          API_URL=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`ApiURL`].OutputValue' \
-            --output text)
-          
+
+          echo "Fetching CloudFormation outputs for stack: $STACK_NAME"
+          aws cloudformation describe-stacks --stack-name "$STACK_NAME" \
+            --query 'Stacks[0].Outputs' --output table || true
+
+          # Try common output keys (adjust to match your SAM template Outputs)
+          API_URL="$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiUrl' || OutputKey=='ApiURL' || OutputKey=='ApiEndpoint' || OutputKey=='ServerlessRestApi'].OutputValue | [0]" \
+            --output text || true)"
+
+          if [ -z "${API_URL:-}" ] || [ "$API_URL" = "None" ]; then
+            echo "ERROR: Could not find API URL in CloudFormation outputs."
+            echo "Fix by ensuring your SAM template defines an Output with a known key (e.g., ApiUrl) that contains the full base URL."
+            exit 1
+          fi
+
+          # Ensure trailing slash
+          case "$API_URL" in
+            */) ;;
+            *) API_URL="${API_URL}/" ;;
+          esac
+
           echo "Testing API at: ${API_URL}counter"
-          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" ${API_URL}counter)
-          
-          if [ $RESPONSE_CODE -eq 200 ]; then
-            echo "✅ Health check passed! API is working."
+          RESPONSE_CODE="$(curl -s -o /dev/null -w "%{http_code}" "${API_URL}counter")"
+
+          if [ "$RESPONSE_CODE" -eq 200 ]; then
+            echo "Health check passed! API is working."
           else
-            echo "❌ Health check failed with status: $RESPONSE_CODE"
+            echo "Health check failed with status: $RESPONSE_CODE"
             exit 1
           fi
