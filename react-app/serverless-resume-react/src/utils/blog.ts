@@ -61,7 +61,14 @@ function parseFrontmatter(raw: string): FrontmatterResult {
 // ---------------------------------------------------------------------------
 
 function slugFromPath(path: string): string {
-  return path.split("/").pop()?.replace(/\.md$/, "") ?? "";
+  return (
+    path
+      .split("/")
+      .pop()
+      ?.replace(/\.md$/, "")
+      .toLowerCase()
+      .replace(/_/g, "-") ?? ""
+  );
 }
 
 function parsePostMeta(path: string, raw: string): PostMeta {
