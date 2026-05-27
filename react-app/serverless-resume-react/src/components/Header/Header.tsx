@@ -126,6 +126,7 @@ const Header: React.FC = () => {
             <li>
               <Link
                 to="/blog"
+                onClick={() => setIsMenuOpen(false)}
                 className="block py-0 px-4 text-blue-500 font-bold transition-colors duration-200 hover:text-white"
               >
                 Blog
