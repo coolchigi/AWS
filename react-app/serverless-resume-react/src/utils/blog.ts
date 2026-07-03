@@ -92,7 +92,13 @@ export function getAllPosts(): PostMeta[] {
       const raw = (mod as { default: string }).default;
       return parsePostMeta(path, raw);
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      // Date.parse yields NaN for empty/invalid dates; fall back to 0 so those
+      // posts sort deterministically to the end (oldest) instead of shuffling.
+      const bTime = Date.parse(b.date) || 0;
+      const aTime = Date.parse(a.date) || 0;
+      return bTime - aTime;
+    });
 }
 
 export function getPostBySlug(slug: string): Post | null {
