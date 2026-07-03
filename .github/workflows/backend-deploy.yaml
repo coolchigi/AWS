@@ -54,10 +54,12 @@ jobs:
           aws cloudformation describe-stacks --stack-name "$STACK_NAME" \
             --query 'Stacks[0].Outputs' --output table || true
 
-          # Try common output keys
+          # Try common output keys that hold a full URL.
+          # NOTE: ServerlessRestApi is intentionally excluded here — it is an
+          # API ID, not a URL, and is handled by the ID-based fallback below.
           API_URL="$(aws cloudformation describe-stacks \
             --stack-name "$STACK_NAME" \
-            --query "Stacks[0].Outputs[?OutputKey=='ApiUrl' || OutputKey=='ApiURL' || OutputKey=='ApiEndpoint' || OutputKey=='ServerlessRestApi'].OutputValue | [0]" \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiUrl' || OutputKey=='ApiURL' || OutputKey=='ApiEndpoint'].OutputValue | [0]" \
             --output text || true)"
 
           API_URL="$(echo "${API_URL:-}" | xargs || true)"
