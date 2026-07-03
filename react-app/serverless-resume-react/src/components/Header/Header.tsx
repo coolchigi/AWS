@@ -17,20 +17,31 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavLinkClick = (section: string) => {
-    setActiveSection(section);
-    setIsMenuOpen(false);
-
-    if (location.pathname !== "/") {
-      // Navigate to home page — browser will scroll to the anchor
-      navigate(`/#${section}`);
-      return;
-    }
-
+  const scrollToSection = (section: string) => {
     const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleNavLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    section: string
+  ) => {
+    // Prevent the anchor from writing to the URL hash — HashRouter owns it,
+    // and a raw "#about" would be parsed as a route and hit the catch-all.
+    e.preventDefault();
+    setActiveSection(section);
+    setIsMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      // Off the home route — go home first, then scroll once the section mounts.
+      navigate("/");
+      setTimeout(() => scrollToSection(section), 100);
+      return;
+    }
+
+    scrollToSection(section);
   };
 
   useEffect(() => {
@@ -79,8 +90,8 @@ const Header: React.FC = () => {
         {/* Logo/Brand */}
         <div className="flex items-center">
           <a
-            href="/#about"
-            onClick={() => handleNavLinkClick("about")}
+            href="/"
+            onClick={(e) => handleNavLinkClick(e, "about")}
             className="flex items-center space-x-2 text-blue-500"
           >
             <img
@@ -109,8 +120,8 @@ const Header: React.FC = () => {
             ].map(({ id, label }) => (
               <li key={id}>
                 <a
-                  href={`/#${id}`}
-                  onClick={() => handleNavLinkClick(id)}
+                  href="/"
+                  onClick={(e) => handleNavLinkClick(e, id)}
                   className={`block py-0 px-4 transition-colors duration-200
         ${
           activeSection === id
