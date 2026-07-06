@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import profilePic from "../../assets/img/profile-pic.jpeg";
 
 // Scroll offset constant for better maintainability
@@ -9,19 +10,38 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const scrollTimeoutRef = useRef<number | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavLinkClick = (section: string) => {
-    setActiveSection(section);
-    setIsMenuOpen(false);
-
+  const scrollToSection = (section: string) => {
     const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleNavLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    section: string
+  ) => {
+    // Prevent the anchor from writing to the URL hash — HashRouter owns it,
+    // and a raw "#about" would be parsed as a route and hit the catch-all.
+    e.preventDefault();
+    setActiveSection(section);
+    setIsMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      // Off the home route — go home first, then scroll once the section mounts.
+      navigate("/");
+      setTimeout(() => scrollToSection(section), 100);
+      return;
+    }
+
+    scrollToSection(section);
   };
 
   useEffect(() => {
@@ -29,8 +49,6 @@ const Header: React.FC = () => {
       "about",
       "experience",
       "technical-expertise",
-      "interests",
-      "awards"
     ];
 
     const handleScroll = () => {
@@ -72,8 +90,8 @@ const Header: React.FC = () => {
         {/* Logo/Brand */}
         <div className="flex items-center">
           <a
-            href="#about"
-            onClick={() => handleNavLinkClick("about")}
+            href="/"
+            onClick={(e) => handleNavLinkClick(e, "about")}
             className="flex items-center space-x-2 text-blue-500"
           >
             <img
@@ -96,29 +114,35 @@ const Header: React.FC = () => {
         <div className={`${isMenuOpen ? "block" : "hidden"} md:block`}>
           <ul className="flex flex-col md:flex-row md:space-x-8">
             {[
-              "about",
-              "experience",
-              "technical-expertise",
-              "education",
-              "interests",
-              "awards"
-            ].map((section) => (
-              <li key={section}>
+              { id: "about", label: "About" },
+              { id: "experience", label: "Experience" },
+              { id: "technical-expertise", label: "Projects" },
+            ].map(({ id, label }) => (
+              <li key={id}>
                 <a
-                  href={`#${section}`}
-                  onClick={() => handleNavLinkClick(section)}
-                  className={`block py-0 px-4 capitalize transition-colors duration-200
+                  href="/"
+                  onClick={(e) => handleNavLinkClick(e, id)}
+                  className={`block py-0 px-4 transition-colors duration-200
         ${
-          activeSection === section
+          activeSection === id
             ? "text-white font-bold"
             : "text-blue-500 font-bold"
         }
         hover:text-white`}
                 >
-                  {section === "technical-expertise" ? "expertise" : section}
+                  {label}
                 </a>
               </li>
             ))}
+            <li>
+              <Link
+                to="/blog"
+                onClick={() => setIsMenuOpen(false)}
+                className="block py-0 px-4 text-blue-500 font-bold transition-colors duration-200 hover:text-white"
+              >
+                Blog
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

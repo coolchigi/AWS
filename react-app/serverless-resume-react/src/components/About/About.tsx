@@ -1,4 +1,31 @@
 import React from "react";
+import cloudPractitioner from "../../assets/img/aws-certified-cloud-practitioner.png";
+import solutionsArchitect from "../../assets/img/aws-certified-solutions-architect-associate.png";
+import aiPractitioner from "../../assets/img/aws-certified-ai-practitioner.png";
+
+const certifications = [
+  {
+    title: "AWS Certified Cloud Practitioner",
+    image: cloudPractitioner,
+    link: "https://www.credly.com/badges/e479bdf1-d672-4638-a6e8-35de53c3f3bf/public_url",
+  },
+  {
+    title: "AWS Certified Solutions Architect Associate",
+    image: solutionsArchitect,
+    link: "https://www.credly.com/badges/876a2eef-b396-408d-86ff-811da7f10d5a/public_url",
+  },
+  {
+    title: "AWS Certified AI Practitioner",
+    image: aiPractitioner,
+    link: "https://www.credly.com/badges/58b81f6e-19af-484b-9048-b5b39d8103b7/public_url",
+  },
+];
+
+const academicAchievements = [
+  "Dean's Honors List",
+  "CS Honours Program",
+  "Google DSC Member",
+];
 
 const About: React.FC = () => {
   return (
@@ -58,7 +85,44 @@ const About: React.FC = () => {
                 linkedin.com/in/chigozirim-eke/
               </a>
             </div>
+
+          {/* AWS Cert Badges */}
+          <div className="mt-6">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+              AWS Certifications
+            </p>
+            <div className="flex items-center gap-4 flex-wrap">
+              {certifications.map((cert) => (
+                <a
+                  key={cert.title}
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={cert.title}
+                  className="hover:scale-110 transition-transform duration-200"
+                >
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="h-16 w-16 object-contain"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
+
+          {/* Academic Achievements */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {academicAchievements.map((achievement) => (
+              <span
+                key={achievement}
+                className="inline-flex items-center gap-1 px-3 py-1 bg-pink-50 text-pink-700 border border-pink-200 rounded-full text-xs font-medium"
+              >
+                🏆 {achievement}
+              </span>
+            ))}
+          </div>
+        </div>
 
           {/* Story Section */}
           <div className="text-blue-500">
