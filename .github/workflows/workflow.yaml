@@ -31,18 +31,32 @@ jobs:
         env:
           VITE_API_GATEWAY_URL: ${{ secrets.VITE_API_GATEWAY_URL }}
 
-      # Upload to S3
+      # Upload to S3 with cache headers that prevent stale-asset blank pages:
+      #  - Hashed assets (index-<hash>.js/.css) are immutable — cache for a year.
+      #  - index.html must always revalidate so it references the current bundles.
       - name: Upload to S3 bucket
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --exclude '.git*/*' --delete --follow-symlinks
         env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION_FRONT }}
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "us-east-1"
-          SOURCE_DIR: "react-app/serverless-resume-react/dist"
+          AWS_DEFAULT_REGION: "us-east-1"
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        run: |
+          set -euo pipefail
+          DIST="react-app/serverless-resume-react/dist"
+
+          # 1) Everything except index.html — long-lived immutable cache.
+          #    --delete prunes old hashed bundles that are no longer referenced.
+          aws s3 sync "$DIST" "s3://$AWS_S3_BUCKET" \
+            --delete \
+            --exclude ".git*/*" \
+            --exclude "index.html" \
+            --cache-control "public, max-age=31536000, immutable"
+
+          # 2) index.html last — no-cache so returning visitors always get the
+          #    entry point pointing at the freshly uploaded assets.
+          aws s3 cp "$DIST/index.html" "s3://$AWS_S3_BUCKET/index.html" \
+            --cache-control "no-cache" \
+            --content-type "text/html"
 
       # Invalidate Cloudfront distribution and push
       - name: invalidate
