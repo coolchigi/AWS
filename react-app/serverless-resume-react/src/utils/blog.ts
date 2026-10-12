@@ -1,9 +1,17 @@
 import type { Post, PostMeta } from "../types/blog";
 
-// Loaded at build time — no runtime file system access
-const markdownFiles = import.meta.glob("../content/blog/*.md", {
-  query: "?raw",
+// Loaded at build time — no runtime file system access.
+// Only the frontmatter is bundled up front (see the ?frontmatter plugin in vite.config.ts).
+// A post's full text is a separate chunk that loads when the post is opened.
+const frontmatterFiles = import.meta.glob<string>("../content/blog/*.md", {
+  query: "?frontmatter",
+  import: "default",
   eager: true,
+});
+
+const markdownFiles = import.meta.glob<string>("../content/blog/*.md", {
+  query: "?raw",
+  import: "default",
 });
 
 // ---------------------------------------------------------------------------
@@ -83,15 +91,13 @@ function parsePostMeta(path: string, raw: string): PostMeta {
       : [],
     coverImage:
       typeof data.coverImage === "string" ? data.coverImage : undefined,
+    series: typeof data.series === "string" ? data.series : undefined,
   };
 }
 
 export function getAllPosts(): PostMeta[] {
-  return Object.entries(markdownFiles)
-    .map(([path, mod]) => {
-      const raw = (mod as { default: string }).default;
-      return parsePostMeta(path, raw);
-    })
+  return Object.entries(frontmatterFiles)
+    .map(([path, frontmatter]) => parsePostMeta(path, frontmatter))
     .sort((a, b) => {
       // Date.parse yields NaN for empty/invalid dates; fall back to 0 so those
       // posts sort deterministically to the end (oldest) instead of shuffling.
@@ -101,7 +107,7 @@ export function getAllPosts(): PostMeta[] {
     });
 }
 
-export function getPostBySlug(slug: string): Post | null {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
   // Validate slug — rejects malformed URLs before any lookup
   if (!/^[a-z0-9-]+$/.test(slug)) return null;
 
@@ -110,11 +116,12 @@ export function getPostBySlug(slug: string): Post | null {
   );
   if (!entry) return null;
 
-  const raw = (entry[1] as { default: string }).default;
+  const [path, loadRaw] = entry;
+  const raw = await loadRaw();
   const { content } = parseFrontmatter(raw);
 
   return {
-    ...parsePostMeta(entry[0], raw),
+    ...parsePostMeta(path, raw),
     content,
   };
 }

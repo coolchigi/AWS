@@ -5,6 +5,8 @@ export interface PostMeta {
   description: string;
   tags: string[];
   coverImage?: string;
+  // Posts that belong to a series show inside that series' card instead of on their own
+  series?: string;
 }
 
 export interface Post extends PostMeta {
